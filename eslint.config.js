@@ -9,6 +9,12 @@ export default defineConfig([
   globalIgnores(['dist']),
   {
     files: ['**/*.{ts,tsx}'],
+    "rules": {
+      "semi": ["error", "always"],
+      "indent": [
+        "error", "tab"
+      ]
+    },
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
