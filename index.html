@@ -1,13 +1,132 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>12-digi-react</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 001</title>
+    <!--Linking CSS with HTML-->
+    <link rel="stylesheet" href="./src/App.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@1..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="logo">
+            <img src="./logos/logo-short.png" class="logo-img">
+    </div>
+    <div class="user-btn">
+            <button>
+            <img src="./icons/user-icon-50px.png" alt="user icon">
+            </button>
+    </div>
+    <div class="main-content">
+    <!--Pomodoro Timer Feature-->
+        <div class="timer">
+            <div class="edit-btn">
+                <button> 
+                    <img src="./icons/edit-icon.png" alt="edit icon">
+                </button>
+            </div>
+            <div class="Timer-count">
+                <span>25:00</span>
+            </div>
+            <div class="buttons-timer">
+                <button class="side-btn-timer">
+                    Reset
+                </button>
+                <button class="pause-play-btn">
+                    <img src="./icons/play-icon.png" alt="play-icon">
+                </button>
+                <button class="side-btn-timer">
+                    Break
+                </button>
+            </div>
+        </div>
+    <!--To do List Feature-->
+        <div class="todo-list">
+            <div class="top-text-todo">
+                <img class="icon" src="./icons/list-icon.png" alt="event list icon">
+                <span class="title-text">To-Do List</span>
+            </div>
+            <input type="text" placeholder="type here.." id="input-field" class="js-todo-input" maxlength="25"></input>
+            <button onclick="addTodo()">Add</button>
+            <div class="js-todo-list"></div>
+        </div>
+    <!--Notes Feature-->
+        <div class="notes">
+            <div class="top-text-notes">
+                <img class="icon" src="./icons/book-icon.png" alt="event list icon">
+                <span class="title-text">My Notes</span>
+            </div>
+            <div class="Button-content">
+                <button id="add-notes" onclick="notesPopUpAlert()">Add Notes</button>
+            </div>
+        </div>    
+        <div class="notes-pop-up" id="notes-alert">
+            <div class="pop-up-content">
+                <span>Pop-up</span>
+                <input type="text" placeholder="title...">
+                <input type="file">
+                <input type="url" placeholder="url to your notes">
+                <button id="submit">submit</button>
+                <button id="close-notes">close</button>
+            </div>
+        </div>
+    <!--Calendar Feature-->
+        <div class="calendar">
+            <div class="top-text">
+                    <button class="previous-btn">
+                        <img src="./icons/arrow-back.png" alt="">
+                    </button>
+                <div class="month-Yr">
+                    <div class="month">
+                        <span>January</span>
+                    </div>
+                    <div class="year">
+                        <span>2026</span>
+                    </div>
+                </div>
+                <button class="next-btn">
+                    <img src="./icons/arrow-forward.png" alt="">
+                </button>
+            </div>
+            <div class="days">
+                <div class="Monday">
+                    <span>Mon</span>
+                </div>
+                <div class="Tuesday">
+                    <span>Tue</span>
+                </div>
+                 <div class="Wednesday">
+                    <span>Wed</span>
+                </div>
+                <div class="Thursday">
+                    <span>Thu</span>
+                </div>
+                <div class="Friday">
+                    <span>Fri</span>
+                </div>
+                <div class="Saturday">
+                    <span>Sat</span>
+                </div>
+                <div class="Sunday">
+                    <span>Sun</span>
+                </div>
+            </div>
+        </div>
+    <!--Deadlines Feature-->
+        <div class="deadlines">
+            <div class="top-text-deadlines">
+                <img class="icon" src="./icons/calendar-icon.png" alt="event list icon">
+                <span class="title-text">Deadlines</span>
+            </div>
+            <div class="Button-content">
+                <button>Add Deadline</button>
+            </div>
+        </div>    
+  
+    </div>
+
+    <!--Linking JS with HTML-->
+    <script src="./index.js"></script>
+</body>
 </html>
