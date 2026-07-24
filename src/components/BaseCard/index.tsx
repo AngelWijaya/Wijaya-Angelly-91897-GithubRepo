@@ -5,25 +5,30 @@ export interface BaseCardProps {
     label: string;
     iconUrl: string;
     iconLabel:string;
-    height: number;
-    width: number;
+    height: string;
+    width: string;
     children: React.ReactNode;
 }
 
 export const BaseCard = (props: BaseCardProps) => {
 	const containerStyle: React.CSSProperties = {
+		fontFamily: 'font-family: "Hepta Slab", serif;',
+		borderRadius:'20px',
+		height:props.height ?? '200px',
+		width: props.width ?? '400px',
 		backgroundColor: props.bgColor ?? '#D2DFF2',
 		gridArea: 'box-2',
 	};
 	const containerHeaderStyle: React.CSSProperties ={
 		display: 'inline-flex',
 		padding: '10px 0 10px 0',
+		width:props.width??'390px'
 	};
 	const containerIconStyle : React.CSSProperties ={
 		display: 'inline-block',
 		padding: '1px 5px 0px 20px',
 		width: '26px',
-		height: '26px',
+		height: '23px',
 		color: '#77879E',
 	};
 	const containerTitleStyle: React.CSSProperties ={

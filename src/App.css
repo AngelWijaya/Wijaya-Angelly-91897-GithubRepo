@@ -167,10 +167,10 @@ input[type="text" i] {
 
 .Timer-count{
     display: flex;
-    justify-content: center;
-    font-size: 70px;
-    padding: 0 0 5px 0;
-    color: white;
+        justify-content: center;
+            font-size: 70px;
+                padding: 0 0 5px 0;
+                    color: white;
 }
 
 .edit-btn{
