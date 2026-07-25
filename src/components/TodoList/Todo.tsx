@@ -1,7 +1,23 @@
 import React from "react";
 import { BaseCard } from "../BaseCard";
+import { useState } from "react";
 
+interface Todo {
+	label:string,
+}
 export const TodoList = () =>{
+	const [todos, setTodos] = useState([]);
+	const [value, setValue] = useState("");
+	const todoValue = value;
+	const addTodo = () => {
+		const tmpTodos = [...todos];
+		tmpTodos.push(todoValue);
+		setTodos(tmpTodos);
+	};
+
+	// <Todo label={todoValue}/>;
+
+
 	const inputStyle: React.CSSProperties ={
 		paddingBlock: '1px',
 		paddingInline: '2px',
@@ -37,9 +53,14 @@ export const TodoList = () =>{
 			width='400px'
 			gridArea='box-2'
 		>
-			<div style={todoContentStyle}>
-				<input placeholder="type here.." style={inputStyle}></input>
-				<button style={buttonStyle}>Add</button>
+			<div>
+				<div style={todoContentStyle}>
+					<input placeholder="type here.." style={inputStyle} value={value} onChange={(e) => setValue(e.target.value)}></input>
+					<button style={buttonStyle} onClick={addTodo}>Add</button>
+				</div>
+				<div className="todos">
+					{todos}
+				</div>
 			</div>
 		</BaseCard>    
 	);
