@@ -1,22 +1,26 @@
 import React from "react";
+import { v4 as uuidv4 } from 'uuid';
 import { BaseCard } from "../BaseCard";
 import { useState } from "react";
 
 interface Todo {
+	id: string;
 	label:string,
 }
 export const TodoList = () =>{
-	const [todos, setTodos] = useState([]);
+	const [todos, setTodos] = useState<Todo[]>([]);
 	const [value, setValue] = useState("");
-	const todoValue = value;
+	console.log('todos', todos);
+
 	const addTodo = () => {
 		const tmpTodos = [...todos];
-		tmpTodos.push(todoValue);
+		tmpTodos.push({
+			id: uuidv4(),
+			label: value
+		});
 		setTodos(tmpTodos);
+		setValue("");
 	};
-
-	// <Todo label={todoValue}/>;
-
 
 	const inputStyle: React.CSSProperties ={
 		paddingBlock: '1px',
@@ -28,6 +32,7 @@ export const TodoList = () =>{
 		borderRadius: '10px',
 		border: '1.5px solid #77879E',
 	};
+
 	const buttonStyle:React.CSSProperties ={
 		width: '60px',
 		height: '34px',
@@ -37,6 +42,7 @@ export const TodoList = () =>{
 		color: 'white',
 		margin:'0 0 0 5px',
 	};
+
 	const todoContentStyle: React.CSSProperties ={
 		display:'flex',
 		justifyContent:"center",
@@ -59,7 +65,6 @@ export const TodoList = () =>{
 					<button style={buttonStyle} onClick={addTodo}>Add</button>
 				</div>
 				<div className="todos">
-					{todos}
 				</div>
 			</div>
 		</BaseCard>    
