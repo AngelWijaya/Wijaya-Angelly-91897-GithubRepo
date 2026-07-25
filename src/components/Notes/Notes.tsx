@@ -11,15 +11,26 @@ export const Notes = () => {
 		backgroundColor:'#6d7b8e' ,
 		color: 'white',
 	};
+	const divBtnStyle: React.CSSProperties ={
+		display:'flex',
+		justifyContent:"center",
+		alignItems:'center',
+		width:'400px',
+		height:'40px',
+	};
+
 	return(
 		<BaseCard
 			label="My Notes"
 			iconLabel="Notes icon"
 			iconUrl="icons/book-icon.png"
-			height='900px'
+			height='617px'
 			width='400px'
+			gridArea="box-4"
 		>
-			<button style={notesBtnStyle}>Add Notes</button>
+			<div style={divBtnStyle}>
+				<button style={notesBtnStyle}>Add Notes</button>
+			</div>
 		</BaseCard>   
 	);
 };

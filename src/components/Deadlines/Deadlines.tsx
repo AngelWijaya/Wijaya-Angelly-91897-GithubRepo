@@ -11,15 +11,25 @@ export const Deadlines = () => {
 		backgroundColor:'#6d7b8e' ,
 		color: 'white',
 	};
+	const deadlinesBtnstyle: React.CSSProperties ={
+		display:'flex',
+		justifyContent:"center",
+		alignItems:'center',
+		width:'400px',
+		height:'40px',
+	};
 	return(
-		<BaseCard
+		<BaseCard 
 			label="Deadlines"
 			iconLabel="Deadlines icon"
 			iconUrl="icons/calendar-icon.png"
 			height='300px'
 			width='400px'
+			gridArea="box-5"
 		>
-			<button style={deadlinesBtnStyle}>Add Deadline</button>
+			<div style={deadlinesBtnstyle}>
+				<button style={deadlinesBtnStyle}>Add Deadline</button>
+			</div>
 		</BaseCard>   
 	);
 };

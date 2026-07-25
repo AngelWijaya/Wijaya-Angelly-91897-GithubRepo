@@ -21,16 +21,26 @@ export const TodoList = () =>{
 		color: 'white',
 		margin:'0 0 0 5px',
 	};
+	const todoContentStyle: React.CSSProperties ={
+		display:'flex',
+		justifyContent:"center",
+		alignItems:'center',
+		width:'400px',
+		height:'40px',	
+	};
 	return (
 		<BaseCard
 			label="Todo List"
 			iconLabel="Todo icon"
 			iconUrl="icons/list-icon.png"
-			height='400px'
+			height='305px'
 			width='400px'
+			gridArea='box-2'
 		>
-			<input placeholder="type here.." style={inputStyle}></input>
-			<button style={buttonStyle}>Add</button>
+			<div style={todoContentStyle}>
+				<input placeholder="type here.." style={inputStyle}></input>
+				<button style={buttonStyle}>Add</button>
+			</div>
 		</BaseCard>    
 	);
 };

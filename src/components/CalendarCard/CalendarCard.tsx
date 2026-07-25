@@ -9,14 +9,17 @@ export interface CalendarCardsprops {
     children:React.ReactNode,
     iconLabelPrev:string,
     iconLabelAfter:string,
+	gridArea:string,
 };
 
 export const CalendarCards = (props:CalendarCardsprops) => {
 	const calendarStyle:React.CSSProperties = {
 		borderRadius: '20px',
-		gridArea: 'box-4',
+		gridArea: props.gridArea,
 		backgroundColor: props.bgColor ??'#ffffff',
 		border: '2px solid #68778d',
+		width:'390px',
+		height:'400px',
 	};
 
 	const calendarTopTextStyle:React.CSSProperties ={
@@ -43,10 +46,14 @@ export const CalendarCards = (props:CalendarCardsprops) => {
 		alignItems: 'center',
 		color: '#77879E' ,
 	};
+	const arrowIconStyles: React.CSSProperties ={
+		background:'none',
+		border:'none',
+	};
 	return (
 		<div style={calendarStyle}>
 			<div style={calendarTopTextStyle}>
-				<button>
+				<button style={arrowIconStyles}>
 					<img src={props.arrowIconurlPrev} alt={props.iconLabelPrev}/>
 				</button>
 				<div style={monthYrStyle}>
@@ -57,7 +64,7 @@ export const CalendarCards = (props:CalendarCardsprops) => {
 						<span>{props.year}</span>
 					</div>
 				</div>
-				<button>
+				<button style={arrowIconStyles}>
 					<img src={props.arrowIconurlAfter} alt={props.iconLabelAfter}/>
 				</button>
 			</div>

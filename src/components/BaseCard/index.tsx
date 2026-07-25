@@ -8,20 +8,23 @@ export interface BaseCardProps {
     height: string;
     width: string;
     children: React.ReactNode;
+	gridArea:string,
 }
 
 export const BaseCard = (props: BaseCardProps) => {
 	const containerStyle: React.CSSProperties = {
-		fontFamily: 'font-family: "Hepta Slab", serif;',
+		fontFamily: `Hepta Slab, serif`,
 		borderRadius:'20px',
 		height:props.height ?? '200px',
 		width: props.width ?? '400px',
 		backgroundColor: props.bgColor ?? '#D2DFF2',
-		gridArea: 'box-2',
+		gridArea:props.gridArea,
 	};
+
+	console.log(containerStyle);
 	const containerHeaderStyle: React.CSSProperties ={
 		display: 'inline-flex',
-		padding: '10px 0 10px 0',
+		padding: '10px 0 10px 3px',
 		width:props.width??'390px'
 	};
 	const containerIconStyle : React.CSSProperties ={

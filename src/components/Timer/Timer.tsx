@@ -25,6 +25,7 @@ export const Timer = () => {
 			iconUrl ='icons/edit-icon.png'
 			iconLabel='edit icon'
 			mainTimer= '25:00'
+			gridArea="box-1"
 		>
 			<button style={breakBtnStyle}>
                     Reset

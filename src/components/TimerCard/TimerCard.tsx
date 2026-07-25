@@ -6,11 +6,12 @@ export interface TimerCardProps {
     iconUrl:string,
     iconLabel:string,
     children:React.ReactNode,
+	gridArea:string,
 }
 
 export const TimerCard = (props:TimerCardProps) => {
 	const timerStyle :React.CSSProperties = {
-		gridArea: 'box-1',
+		gridArea: props.gridArea,
 		backgroundColor: '#68778d',
 		borderRadius: '20px',
 		width:'390px',
@@ -20,19 +21,18 @@ export const TimerCard = (props:TimerCardProps) => {
 		display: 'flex',
 		justifyContent: 'right',
 		height: '35px',
-		padding:'10px 5px 10px 0'
+		padding:'5px 5px 0 0'
 	};
 	const timerCountStyle: React.CSSProperties ={
 		display: 'flex',
 		justifyContent: 'center',
 		fontSize: '70px',
-		padding: '10px 0 20px 0',
 		color: 'white',
 	};
 	const buttonTimerStyle: React.CSSProperties ={
 		display: 'flex',
 		justifyContent: 'center',
-		padding: '10px 0 10px 0',
+		padding: '3px 0 0 0',
 	};
 	const editIconStyle:React.CSSProperties ={
 		background: 'none',
