@@ -50,6 +50,29 @@ export const TodoList = () =>{
 		width:'400px',
 		height:'40px',	
 	};
+	const individualTodoStyle: React.CSSProperties={
+		display: 'flex',
+		alignItems: 'center',
+		margin: '10px 0 0 0',
+		padding: '0px 5px 0 0',
+		maxWidth: '360px',
+		height: '40px',
+		backgroundColor: '#f6faff',
+		borderRadius: '10px',
+	};
+	const textTodoStyle:React.CSSProperties ={
+		width: 'fit-content',
+		maxWidth: '90%',
+		padding: '0 0 0 10px',
+		color: '#68778d',
+		fontWeight: 'bolder',
+	};
+	const todosContainerStyle :React.CSSProperties ={
+		width: '380px',
+		height: '310px',
+		padding: '0 20px 0 20px',
+		overflowY: 'scroll',
+	};
 	return (
 		<BaseCard
 			label="Todo List"
@@ -64,7 +87,11 @@ export const TodoList = () =>{
 					<input placeholder="type here.." style={inputStyle} value={value} onChange={(e) => setValue(e.target.value)}></input>
 					<button style={buttonStyle} onClick={addTodo}>Add</button>
 				</div>
-				<div className="todos">
+				<div style={todosContainerStyle}>
+					<div style={individualTodoStyle}>
+						<p style={textTodoStyle}>Todo A</p>
+    					<button>delete</button>
+    				</div>
 				</div>
 			</div>
 		</BaseCard>    

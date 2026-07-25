@@ -11,10 +11,6 @@ export interface BaseCardProps {
 	gridArea:string,
 }
 
-export interface Todo {
-	id: string; // uuid
-	label: string;
-}
 
 
 export const BaseCard = (props: BaseCardProps) => {
