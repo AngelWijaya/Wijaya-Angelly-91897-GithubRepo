@@ -161,8 +161,7 @@ input[type="text" i] {
 }
 
 .buttons-timer{
-    display: flex;
-    justify-content: center;
+
 }
 
 .Timer-count{
@@ -227,9 +226,20 @@ input[type="text" i] {
     padding: 0 20px 0 20px;
     overflow-y: scroll;
 }
+::-webkit-scrollbar{
+    position: absolute;
+    height: 10px;
+    width: 5px;
+}
 
-::-webkit-scrollbar {
-    display: none;
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #68778d85;
+    border-radius: 20px;
+    min-height: 10px;
 }
 .js-todo-list .todos{
     display: flex;
