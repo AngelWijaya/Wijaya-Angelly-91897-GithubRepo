@@ -1,5 +1,6 @@
 import React from "react";
 import { BaseCard } from "../BaseCard";
+import { DeadlinePopUp } from "./DeadlinePopUp";
 
 export const Deadlines = () => {
 	const deadlinesBtnStyle : React.CSSProperties ={

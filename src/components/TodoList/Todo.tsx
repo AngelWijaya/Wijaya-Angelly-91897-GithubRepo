@@ -10,18 +10,28 @@ interface Todo {
 export const TodoList = () =>{
 	const [todos, setTodos] = useState<Todo[]>([]);
 	const [value, setValue] = useState("");
-	console.log('todos', todos);
+
+	const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement> ) => {
+		if (event.key == 'Enter'){
+			addTodo();
+		}
+	};
 
 	const addTodo = () => {
-		const tmpTodos = [...todos];
-		tmpTodos.push({
-			id: uuidv4(),
-			label: value
-		});
-		setTodos(tmpTodos);
-		setValue("");
+		if (value == "") {
+			alert('fill something in'); // replace with appropriate popup
+		}
+		else{
+			const tmpTodos = [...todos];
+			tmpTodos.push({
+				id: uuidv4(),
+				label: value
+			});
+			setTodos(tmpTodos);
+			setValue("");
+		}
 	};
-	const deleteTodos = (id: Todo['id']) => {
+	const checkTodos = (id: Todo['id']) => {
 		const newTodos = todos.filter(todo => todo.id !== id);
 		setTodos(newTodos);
 		
@@ -96,7 +106,7 @@ export const TodoList = () =>{
 		>
 			<div>
 				<div style={todoContentStyle}>
-					<input placeholder="type here.." style={inputStyle} value={value} onChange={(e) => setValue(e.target.value)} maxLength={50}></input>
+					<input placeholder="type here.." style={inputStyle} value={value} onChange={(e) => setValue(e.target.value)} maxLength={50} onKeyDown={handleEnterKey}></input>
 					<button style={buttonStyle} onClick={addTodo}>Add</button>
 				</div>
 				<div style={todosContainerStyle}>
@@ -104,7 +114,7 @@ export const TodoList = () =>{
 						return (
 							<div style={individualTodoStyle}>
 								<p style={textTodoStyle}>{todo.label}</p>
-								<button onClick={() => deleteTodos(todo.id)} style={iconBlockStyle}>
+								<button onClick={() => checkTodos(todo.id)} style={iconBlockStyle}>
 									<img src="icons/check-icon.png" alt="check"/>
 								</button>
 							</div>
