@@ -22,8 +22,7 @@ export const BaseCard = (props: BaseCardProps) => {
 		backgroundColor: props.bgColor ?? '#D2DFF2',
 		gridArea:props.gridArea,
 	};
-
-	console.log(containerStyle);
+	
 	const containerHeaderStyle: React.CSSProperties ={
 		display: 'inline-flex',
 		padding: '10px 0 10px 3px',
