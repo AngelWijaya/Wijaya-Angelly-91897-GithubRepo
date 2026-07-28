@@ -1,8 +1,18 @@
 import React from "react";
 import { BaseCard } from "../BaseCard";
 import { DeadlinePopUp } from "./DeadlinePopUp";
+import { useState } from "react";
 
 export const Deadlines = () => {
+	const [display,setDisplay] = useState(false);
+	const showPopup = () => {
+		setDisplay(true);
+	};
+
+	const closePopup = () => {
+		setDisplay(false);
+	};
+
 	const deadlinesBtnStyle : React.CSSProperties ={
 		fontSize: '15px',
 		width: '350px',
@@ -40,14 +50,17 @@ export const Deadlines = () => {
 			gridArea="box-5"
 		>
 			<div style={deadlinesBtnstyle}>
-				<button style={deadlinesBtnStyle}>Add Deadline</button>
+				<button style={deadlinesBtnStyle} onClick={showPopup}>Add Deadline</button>
 			</div>
-			<DeadlinePopUp 
-				PopUptitle="Set a deadline"
-			>
-				<input type="text" style={inputTextStyle}/>
-				<input type="date" style={datePopUpStyle}/>
-			</DeadlinePopUp>
+			{display &&
+				<DeadlinePopUp 
+					PopUptitle="Set a deadline"
+					onClose={closePopup}
+				>
+					<input type="text" style={inputTextStyle}/>
+					<input type="date" style={datePopUpStyle}/>
+				</DeadlinePopUp>
+			}
 		</BaseCard>   
 		
 	);
