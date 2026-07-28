@@ -5,13 +5,12 @@ import { useState } from "react";
 
 export const Deadlines = () => {
 	const [display,setDisplay] = useState(false);
-	const showPopup = () => {
-		setDisplay(true);
-	};
+	const [deadlines, setDeadlines] = useState("");
 
-	const closePopup = () => {
-		setDisplay(false);
-	};
+
+	const togglePopup = () => setDisplay(!display);
+	// const openPopup = () => setDisplay(true);
+	// const closePopup = () => setDisplay(false)
 
 	const deadlinesBtnStyle : React.CSSProperties ={
 		fontSize: '15px',
@@ -40,6 +39,7 @@ export const Deadlines = () => {
 	const inputTextStyle :React.CSSProperties ={
 		width:'290px'
 	};
+	console.log(deadlines);
 	return(
 		<BaseCard 
 			label="Deadlines"
@@ -50,14 +50,14 @@ export const Deadlines = () => {
 			gridArea="box-5"
 		>
 			<div style={deadlinesBtnstyle}>
-				<button style={deadlinesBtnStyle} onClick={showPopup}>Add Deadline</button>
+				<button style={deadlinesBtnStyle} onClick={togglePopup}>Add Deadline</button>
 			</div>
 			{display &&
 				<DeadlinePopUp 
-					PopUptitle="Set a deadline"
-					onClose={closePopup}
+					popUpTitle="Set a deadline"
+					onClose={togglePopup}
 				>
-					<input type="text" style={inputTextStyle}/>
+					<input type="text" style={inputTextStyle} maxLength={50} value={deadlines} onChange={(e) =>setDeadlines(e.target.value)}/>
 					<input type="date" style={datePopUpStyle}/>
 				</DeadlinePopUp>
 			}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface DeadlinePopUpProps {
-    PopUptitle:string,
+    popUpTitle:string,
 	onClose: () => void;
     children: React.ReactNode,
 
@@ -9,7 +9,7 @@ interface DeadlinePopUpProps {
 const popUpContainerStyle:React.CSSProperties = {
 	backgroundColor:'white',
 	width:'400px',
-	height:'170px',
+	height:'150px',
 	borderRadius:'20px',
 
 };
@@ -51,18 +51,35 @@ const closeIconStyle:React.CSSProperties ={
 	height:'23px',
 	position:'absolute',
 };
+
+const popUpBackground :React.CSSProperties = { 
+	width: '100%',
+	height: '100%',
+	borderRadius: '0',
+	backgroundColor: '#0000008d',
+	display: 'flex',
+	justifyContent: 'center',
+	alignItems: 'center',
+	position: 'fixed',
+	left: '0',
+	top: '0',
+	right: '0',
+	bottom: '0',
+};
 export const DeadlinePopUp = (props:DeadlinePopUpProps) => {
 	return (
-		<div style={popUpContainerStyle}>
-			<div style={popUpTitlesStyle}>
-				<span style={textstyle}>{props.PopUptitle}</span>
-				<img src="icons/close-icon.png" alt="close icon" style={closeIconStyle} onClick={props.onClose}/>
-			</div>
-			<div style={deadlineDetailStyle}>
-				{props.children}
-			</div>
-			<div style={addDeadlineDivStyle}>
-				<button style={deadlineBtnStyle}>Add deadline</button>
+		<div style={popUpBackground}>
+			<div style={popUpContainerStyle}>
+				<div style={popUpTitlesStyle}>
+					<span style={textstyle}>{props.popUpTitle}</span>
+					<img src="icons/close-icon.png" alt="close icon" style={closeIconStyle} onClick={props.onClose}/>
+				</div>
+				<div style={deadlineDetailStyle}>
+					{props.children}
+				</div>
+				<div style={addDeadlineDivStyle}>
+					<button style={deadlineBtnStyle}>Add deadline</button>
+				</div>
 			</div>
 		</div>
 	);
