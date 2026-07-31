@@ -4,6 +4,7 @@ interface DeadlinePopUpProps {
     popUpTitle:string,
 	onClose: () => void;
     children: React.ReactNode,
+	onAdd:()=> void,
 
 }
 const popUpContainerStyle:React.CSSProperties = {
@@ -78,7 +79,7 @@ export const DeadlinePopUp = (props:DeadlinePopUpProps) => {
 					{props.children}
 				</div>
 				<div style={addDeadlineDivStyle}>
-					<button style={deadlineBtnStyle}>Add deadline</button>
+					<button style={deadlineBtnStyle} onClick={props.onAdd}>Add deadline</button>
 				</div>
 			</div>
 		</div>

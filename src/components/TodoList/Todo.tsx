@@ -4,7 +4,7 @@ import { BaseCard } from "../BaseCard";
 import { useState } from "react";
 
 interface Todo {
-	id: string;
+	id: string,
 	label:string,
 }
 export const TodoList = () =>{
