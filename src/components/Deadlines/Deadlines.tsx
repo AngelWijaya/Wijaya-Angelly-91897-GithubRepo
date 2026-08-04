@@ -27,12 +27,19 @@ export const Deadlines = () => {
 		setValue('');
 	};
 
-	// const checkDeadlines = (deadlines) => {
-	// 	const newDeadlines = deadlinesBox.filter(deadlines => deadlines.id !== id);
-	// };
+	const checkDeadlines = (id:deadlineCard['id']) => {
+		const newDeadlines = deadlines.filter(deadline => deadline.id !== id);
+		setDeadlines(newDeadlines);
+		console.log('hi');
+	};
 
 	const togglePopup = () => setDisplay(!display);
-	
+
+	const checkValueLength = () =>{
+		if (value.length > 20) {
+			console.log('hi');
+		}
+	};
 	const deadlinesBtnStyle : React.CSSProperties ={
 		fontSize: '15px',
 		width: '350px',
@@ -76,8 +83,12 @@ export const Deadlines = () => {
 
 	const deadlineTextStyle: React.CSSProperties ={
 		maxWidth: '340px',
+		overflow:'hidden',
+		textOverflow:'ellipsis',
+		maxLines:'1',
 		width: 'fit-content',
-		padding: '0 0 0 10px',
+		padding: '10px 0 10px 10px',
+		display:'block',
 		color: '#68778d',
 		fontWeight: 'bolder',
 	};
@@ -94,19 +105,17 @@ export const Deadlines = () => {
 		maxHeight:'200px',
 	};
 	const deadlineDateStyle:React.CSSProperties ={
-		margin:'10px 10px 10px 10px',
+		textWrap:'nowrap',
 		width:'100px',
 		height:'30px',
 		fontSize:'13px',
+		margin:'0 0 0 10px',
 		backgroundColor:'#93a9c9',
 		color:'white',
 		fontWeight:'bolder',
 		borderRadius:'20px',
-		display:'flex',
-		justifyContent:'center',
-		alignItems:'center',
+		border:'none',
 	};
-	
 	return(
 		<BaseCard 
 			label="Deadlines"
@@ -130,21 +139,20 @@ export const Deadlines = () => {
 				</DeadlinePopUp>
 			}
 			<div style={deadlineBoxStyle}>
-				{deadlines.map((deadlineCard)=>{
+				{deadlines.map((deadline)=>{
 					return (
 						<div style={individualDeadlineStyle}>
-							<p style={deadlineTextStyle}>{deadlineCard.label}</p>
-							<button style={iconStyle}>
+							<p style={deadlineTextStyle}>{deadline.label}</p>
+							<button style={deadlineDateStyle}>
+								<span>{deadline.date}</span>
+							</button>
+							<button style={iconStyle} onClick={()=>checkDeadlines(deadline.id)}>
 								<img src="icons/check-icon.png" alt="check"/>
 							</button>
-							<div style={deadlineDateStyle}>
-								<span>{deadlineCard.date}</span>
-							</div>
 						</div>
 					);
 				})}
 			</div>
 		</BaseCard>   
-		
 	);
 };
