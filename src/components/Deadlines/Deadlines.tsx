@@ -5,30 +5,34 @@ import { DeadlinePopUp } from "./DeadlinePopUp";
 import { useState } from "react";
 
 
-interface deadlines {
+interface deadlineCard {
 	id: string,
 	label:string,
+	date:string,
 }
 export const Deadlines = () => {
 	const [display,setDisplay] = useState(false);
 	const [value, setValue] = useState("");
-	const  [deadlines,setDeadlines] = useState<deadlines[]>([]);
+	const  [deadlines,setDeadlines] = useState<deadlineCard[]>([]);
+	const [date, setDate] = useState("");
 
 	const addDeadline = () => {
 		const deadlinesBox = [...deadlines];
 		deadlinesBox.push({
 			id: uuidv4(),
-			label: value
+			label: value,
+			date: date
 		});
 		setDeadlines(deadlinesBox);
 		setValue('');
-		console.log(deadlinesBox);
 	};
 
-	const togglePopup = () => setDisplay(!display);
-	// const openPopup = () => setDisplay(true);
-	// const closePopup = () => setDisplay(false)
+	// const checkDeadlines = (deadlines) => {
+	// 	const newDeadlines = deadlinesBox.filter(deadlines => deadlines.id !== id);
+	// };
 
+	const togglePopup = () => setDisplay(!display);
+	
 	const deadlinesBtnStyle : React.CSSProperties ={
 		fontSize: '15px',
 		width: '350px',
@@ -61,12 +65,13 @@ export const Deadlines = () => {
 		display: 'flex',
 		overflowWrap:'anywhere',
 		alignItems: 'center',
-		margin: '10px 0 0 0',
+		margin: '10px 0 0 20px',
 		padding: '5px 5px 5px 5px',
 		maxWidth: '350px',
 		height: '40px',
 		backgroundColor: '#f6faff',
 		borderRadius: '10px',
+		
 	};
 
 	const deadlineTextStyle: React.CSSProperties ={
@@ -83,7 +88,25 @@ export const Deadlines = () => {
 		position:'sticky',
 		border:'none',
 	};
-	console.log(value);
+
+	const deadlineBoxStyle:React.CSSProperties ={
+		width:'400px',
+		maxHeight:'200px',
+	};
+	const deadlineDateStyle:React.CSSProperties ={
+		margin:'10px 10px 10px 10px',
+		width:'100px',
+		height:'30px',
+		fontSize:'13px',
+		backgroundColor:'#93a9c9',
+		color:'white',
+		fontWeight:'bolder',
+		borderRadius:'20px',
+		display:'flex',
+		justifyContent:'center',
+		alignItems:'center',
+	};
+	
 	return(
 		<BaseCard 
 			label="Deadlines"
@@ -103,17 +126,24 @@ export const Deadlines = () => {
 					onAdd={addDeadline}
 				>
 					<input type="text" style={inputTextStyle} maxLength={50} value={value} onChange={(e) =>setValue(e.target.value)}/>
-					<input type="date" style={datePopUpStyle}/>
+					<input type="date" style={datePopUpStyle} value={date} onChange={(e)=> setDate(e.target.value)}/>
 				</DeadlinePopUp>
 			}
-			{deadlines.map((deadlines)=>{
-				<div style={individualDeadlineStyle}>
-					<p style={deadlineTextStyle}>{deadlines.label}</p>
-					<button style={iconStyle}>
-						<img src="icons/check-icon.png" alt="check"/>
-					</button>
-				</div>;	
-			})}
+			<div style={deadlineBoxStyle}>
+				{deadlines.map((deadlineCard)=>{
+					return (
+						<div style={individualDeadlineStyle}>
+							<p style={deadlineTextStyle}>{deadlineCard.label}</p>
+							<button style={iconStyle}>
+								<img src="icons/check-icon.png" alt="check"/>
+							</button>
+							<div style={deadlineDateStyle}>
+								<span>{deadlineCard.date}</span>
+							</div>
+						</div>
+					);
+				})}
+			</div>
 		</BaseCard>   
 		
 	);
