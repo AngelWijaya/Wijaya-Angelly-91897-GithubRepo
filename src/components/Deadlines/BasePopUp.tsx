@@ -1,10 +1,11 @@
 import React from 'react';
 
-interface DeadlinePopUpProps {
+interface BasePopUpProps {
     popUpTitle:string,
 	onClose: () => void;
     children: React.ReactNode,
 	onAdd:()=> void,
+	buttonLabel:string,
 
 }
 const popUpContainerStyle:React.CSSProperties = {
@@ -23,21 +24,22 @@ const textstyle: React.CSSProperties ={
 	fontSize:'19px',
 	padding:'10px 0px 0px 10px'
 };
-const deadlineDetailStyle :React.CSSProperties ={
+const popUpDetailStyle :React.CSSProperties ={
 	display:'flex',
 	justifyContent:'center',
 	alignItems:'center',
 	padding:'0 20px 0 0'
 };
 
-const addDeadlineDivStyle: React.CSSProperties ={
+const popUpDivStyle: React.CSSProperties ={
 	display:'flex',
 	justifyContent:'center',
 	alignItems:'center',
 	padding:'10px 0 0 0',
 };
 
-const deadlineBtnStyle:React.CSSProperties ={
+const popUpBtnStyle:React.CSSProperties ={
+	cursor:'pointer',
 	width:'360px',
 	height:'40px',
 	backgroundColor:'#6d7b8e',
@@ -47,6 +49,7 @@ const deadlineBtnStyle:React.CSSProperties ={
 };
 
 const closeIconStyle:React.CSSProperties ={
+	cursor:'pointer',
 	paddingLeft:'190px',
 	width:'23px',
 	height:'23px',
@@ -67,7 +70,7 @@ const popUpBackground :React.CSSProperties = {
 	right: '0',
 	bottom: '0',
 };
-export const DeadlinePopUp = (props:DeadlinePopUpProps) => {
+export const BasePopUp = (props:BasePopUpProps) => {
 	return (
 		<div style={popUpBackground}>
 			<div style={popUpContainerStyle}>
@@ -75,11 +78,11 @@ export const DeadlinePopUp = (props:DeadlinePopUpProps) => {
 					<span style={textstyle}>{props.popUpTitle}</span>
 					<img src="icons/close-icon.png" alt="close icon" style={closeIconStyle} onClick={props.onClose}/>
 				</div>
-				<div style={deadlineDetailStyle}>
+				<div style={popUpDetailStyle}>
 					{props.children}
 				</div>
-				<div style={addDeadlineDivStyle}>
-					<button style={deadlineBtnStyle} onClick={props.onAdd}>Add deadline</button>
+				<div style={popUpDivStyle}>
+					<button style={popUpBtnStyle} onClick={props.onAdd}>{props.buttonLabel}</button>
 				</div>
 			</div>
 		</div>

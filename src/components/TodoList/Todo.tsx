@@ -19,7 +19,7 @@ export const TodoList = () =>{
 
 	const addTodo = () => {
 		if (value == "") {
-			alert('fill something in'); // replace with appropriate popup
+			alert('Todo field empty, please fill it in!'); // replace with appropriate popup
 		}
 		else{
 			const tmpTodos = [...todos];
@@ -48,6 +48,7 @@ export const TodoList = () =>{
 	};
 
 	const buttonStyle:React.CSSProperties ={
+		cursor:'pointer',
 		width: '60px',
 		height: '34px',
 		borderRadius: '10px',
@@ -90,6 +91,7 @@ export const TodoList = () =>{
 		overflowY: 'scroll',
 	};
 	const iconBlockStyle :React.CSSProperties ={
+		cursor:'pointer',
 		background:'none',
 		marginLeft:'auto',
 		position:'sticky',

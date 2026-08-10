@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseCard } from "../BaseCard";
 import { v4 as uuidv4 } from 'uuid';
-import { DeadlinePopUp } from "./DeadlinePopUp";
+import { BasePopUp } from "./BasePopUp";
 import { useState } from "react";
 
 
@@ -17,29 +17,32 @@ export const Deadlines = () => {
 	const [date, setDate] = useState("");
 
 	const addDeadline = () => {
-		const deadlinesBox = [...deadlines];
-		deadlinesBox.push({
-			id: uuidv4(),
-			label: value,
-			date: date
-		});
-		setDeadlines(deadlinesBox);
-		setValue('');
+		if(value == "") {
+			alert('Title field empty, please fill it in!');
+		}
+		if(date == ''){
+			alert('Date field empty, please fill it in!');
+		}
+		else{
+			const deadlinesBox = [...deadlines];
+			deadlinesBox.push({
+				id: uuidv4(),
+				label: value,
+				date: date
+			});
+			setDeadlines(deadlinesBox);
+			setValue('');
+			setDate('');
+		}
 	};
 
 	const checkDeadlines = (id:deadlineCard['id']) => {
 		const newDeadlines = deadlines.filter(deadline => deadline.id !== id);
 		setDeadlines(newDeadlines);
-		console.log('hi');
 	};
 
 	const togglePopup = () => setDisplay(!display);
 
-	const checkValueLength = () =>{
-		if (value.length > 20) {
-			console.log('hi');
-		}
-	};
 	const deadlinesBtnStyle : React.CSSProperties ={
 		fontSize: '15px',
 		width: '350px',
@@ -48,8 +51,9 @@ export const Deadlines = () => {
 		border: '1.5px solid #6d7b8e',
 		backgroundColor:'#6d7b8e' ,
 		color: 'white',
+		cursor:'pointer',
 	};
-	const deadlinesBtnstyle: React.CSSProperties ={
+	const deadlinesBtnContainerstyle: React.CSSProperties ={
 		display:'flex',
 		justifyContent:"center",
 		alignItems:'center',
@@ -57,6 +61,7 @@ export const Deadlines = () => {
 		height:'40px',
 	};
 	const datePopUpStyle: React.CSSProperties ={
+		cursor:'pointer',
 		border: '1.5px solid #77879E',
 		color:'#77879E',
 		width: '150px',
@@ -82,11 +87,9 @@ export const Deadlines = () => {
 	};
 
 	const deadlineTextStyle: React.CSSProperties ={
-		maxWidth: '340px',
 		overflow:'hidden',
 		textOverflow:'ellipsis',
-		maxLines:'1',
-		width: 'fit-content',
+		whiteSpace:'nowrap',
 		padding: '10px 0 10px 10px',
 		display:'block',
 		color: '#68778d',
@@ -94,6 +97,7 @@ export const Deadlines = () => {
 	};
 
 	const iconStyle:React.CSSProperties ={
+		cursor:'pointer',
 		background:'none',
 		marginLeft:'auto',
 		position:'sticky',
@@ -105,6 +109,7 @@ export const Deadlines = () => {
 		maxHeight:'200px',
 	};
 	const deadlineDateStyle:React.CSSProperties ={
+		cursor:'pointer',
 		textWrap:'nowrap',
 		width:'100px',
 		height:'30px',
@@ -116,6 +121,10 @@ export const Deadlines = () => {
 		borderRadius:'20px',
 		border:'none',
 	};
+
+	const textContainerStyle :React.CSSProperties ={
+		width:'200px'
+	};
 	return(
 		<BaseCard 
 			label="Deadlines"
@@ -125,24 +134,27 @@ export const Deadlines = () => {
 			width='400px'
 			gridArea="box-5"
 		>
-			<div style={deadlinesBtnstyle}>
+			<div style={deadlinesBtnContainerstyle}>
 				<button style={deadlinesBtnStyle} onClick={togglePopup}>Add Deadline</button>
 			</div>
 			{display &&
-				<DeadlinePopUp 
+				<BasePopUp 
 					popUpTitle="Set a deadline"
 					onClose={togglePopup}
 					onAdd={addDeadline}
+					buttonLabel="Add Deadlines"
 				>
 					<input type="text" style={inputTextStyle} maxLength={50} value={value} onChange={(e) =>setValue(e.target.value)}/>
 					<input type="date" style={datePopUpStyle} value={date} onChange={(e)=> setDate(e.target.value)}/>
-				</DeadlinePopUp>
+				</BasePopUp>
 			}
 			<div style={deadlineBoxStyle}>
 				{deadlines.map((deadline)=>{
 					return (
 						<div style={individualDeadlineStyle}>
-							<p style={deadlineTextStyle}>{deadline.label}</p>
+							<div style={textContainerStyle}>
+								<p style={deadlineTextStyle}>{deadline.label}</p>
+							</div>
 							<button style={deadlineDateStyle}>
 								<span>{deadline.date}</span>
 							</button>

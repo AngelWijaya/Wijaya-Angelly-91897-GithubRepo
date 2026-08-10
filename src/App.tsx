@@ -42,7 +42,7 @@ function App() {
 			<MainContent>
 				<div className='Column-1'>
 					<div style={CardOne}><Timer/></div>
-					<div style={CardFour}><Calendar/></div>
+					<div style={CardFour}><Calendar locale='en-US'/></div>
 				</div>
 				<div className='Column-2'> 
 					<div style={CardTwo}><TodoList/></div>

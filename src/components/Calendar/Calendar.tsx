@@ -1,7 +1,12 @@
 import React from "react";
 import {CalendarCards} from '../CalendarCard/CalendarCard';
+import { useCalendar } from "./useCalendar";
 
-export const Calendar = () => {
+export const Calendar:React.FC<{locale?:string}> = 
+({locale = navigator.language}) => {
+	
+	const {startofMonth, goNext,goPrevious} = useCalendar(new Date(), locale);
+
 	return(
 		<CalendarCards
 			bgColor="#ffffff"
