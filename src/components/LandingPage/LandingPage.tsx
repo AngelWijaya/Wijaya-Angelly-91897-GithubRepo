@@ -4,12 +4,14 @@ import { LandingNavigationBar } from './LandingNavigationBar';
 
 const LandingPage = () => {
 	const navbarContentStyle:React.CSSProperties={
-		display:'flex',
-		justifyContent:'left',
 		width:'500px',
 		minWidth:'500px',
-		// marginLeft:'auto',
-		// position:'sticky',
+		marginLeft:'auto',
+		position:'sticky',
+		alignItems:'center',
+	};
+	const navbarContentLink:React.CSSProperties={
+		padding:'0 10px 0 10px'
 	};
 	return (
 		<LandingNavigationBar
@@ -17,9 +19,9 @@ const LandingPage = () => {
 			logoLabel='Logo'
 		>
 			<div style={navbarContentStyle}>
-				<a href=''>Home</a>
-				<a href=''>How it works</a>
-				<a href=''>Sign up</a>
+				<a href='' style={navbarContentLink}>Home</a>
+				<a href='' style={navbarContentLink}>How it works</a>
+				<a href='' style={navbarContentLink}>Sign up</a>
 			</div>
 		</LandingNavigationBar>
 	);

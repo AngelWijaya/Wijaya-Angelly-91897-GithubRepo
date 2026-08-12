@@ -13,6 +13,7 @@ export const LandingNavigationBar = (props: navBarProps) => {
 		padding: '10px 10px 0 20px'
 	};
 	const navigationBarStyle:React.CSSProperties={
+		display:'inline-flex',
 		width:'100%',
 		height:'70px',
 		backgroundColor:'white',
@@ -22,7 +23,9 @@ export const LandingNavigationBar = (props: navBarProps) => {
 
 	return (
 		<div style={navigationBarStyle}>
-			<img src={props.logoURL} alt={props.logoLabel} style={logoStyle}/>
+			<div>
+				<img src={props.logoURL} alt={props.logoLabel} style={logoStyle}/>
+			</div>
 			{props.children}
 		</div>
 	);
