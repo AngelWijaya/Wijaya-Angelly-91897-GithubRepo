@@ -1,41 +1,51 @@
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
+import dayjs from 'dayjs';
+import { useState } from 'react';
 import React from 'react';
 import Badge from '@mui/material/Badge';
-// import { PickerDay, PickerDayProps } from '@mui/x-date-pickers/PickerDay';
+import { PickerDay } from '@mui/x-date-pickers';
+import type { PickerDayProps} from '@mui/x-date-pickers';
 
-
-interface calendarProps {
+interface CalendarProps {
     bgColor?:string,
     fontColor?:string,
 }
 
+interface ServerDayProps extends PickerDayProps {
+	dates?: string[],
+}
 
-const serverDay = (props: PickerDayProps) => {
-	// const { highlightedDays = [], day, outsideCurrentMonth, ...other}=props;
-
-	// const isSelected=
-	// 	!props.outsideCurrentMonth && highlightedDays.indexOf(props.day.date()) >= 0;
-
+const ServerDay = (props: ServerDayProps) => {
+	const { dates, ...pickerDayProps } = props;
+	const curServerDay = dayjs(pickerDayProps.day).format('YYYY-MM-DD');
+	const isSelected = dates && dates.includes(curServerDay) ? true : false;
 	return(
 		<Badge
-			key={props.day.toString()}
-			overlap="circular"
-			badgeContent={'💗'}
+			badgeContent={isSelected ? '💗' : undefined}
 		>
-			<PickerDay {...props} />
+			<PickerDay {...pickerDayProps} />
 		</Badge>
 	);
 };
 
-export const BasicDateCalendar = (props:calendarProps) => {
+
+
+export const BasicDateCalendar = (props:CalendarProps) => {
+	const highlightedDays = ['2026-08-17'];
+	// const [highlightedDays, setHighlightedDays]= useState("2026-08-17");
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
 			<DateCalendar
 				slots={{
-					day: serverDay,
+					day: ServerDay,
+				}}
+				slotProps={{
+					day: {
+						dates: highlightedDays,
+					} as any,
 				}}
 				sx={{
 					backgroundColor: props.bgColor??'#ffffff',
