@@ -8,9 +8,12 @@ import { Calendar } from '../src/components/Calendar/Calendar';
 import {MainContent} from './components/MainContent/MainContent';
 import type React from 'react';
 import { TopNav } from './components/TopNav/TopNav';
+import { useState } from 'react';
+import type { DeadlineCard } from './components/Deadlines/Deadlines';
 // import LandingPage from './components/LandingPage/LandingPage';
 
 function App() {
+	const [deadlines, setDeadlines] = useState<DeadlineCard[]>([]);
 	const CardOne: React.CSSProperties={
 		gridArea:'box-1',
 		padding:'20px 0 0 0',
@@ -47,7 +50,7 @@ function App() {
 				</div>
 				<div className='Column-2'> 
 					<div style={CardTwo}><TodoList/></div>
-					<div style={CardFive}><Deadlines/></div>
+					<div style={CardFive}><Deadlines deadlines={deadlines} setDeadlines={setDeadlines}/></div>
 				</div>
 				<div className='Column-3'>
 					<div style={CardThree}><Notes/></div>

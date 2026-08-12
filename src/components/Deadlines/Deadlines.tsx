@@ -5,15 +5,20 @@ import { BasePopUp } from "../BasePopUp";
 import { useState } from "react";
 
 
-interface deadlineCard {
+export interface DeadlineCard {
 	id: string,
 	label:string,
 	date:string,
 }
-export const Deadlines = () => {
+
+interface DeadlineProps {
+	deadlines:DeadlineCard[],
+	setDeadlines: React.Dispatch<React.SetStateAction<DeadlineCard[]>>;
+};
+
+export const Deadlines = (props: DeadlineProps) => {
 	const [display,setDisplay] = useState(false);
 	const [value, setValue] = useState("");
-	const  [deadlines,setDeadlines] = useState<deadlineCard[]>([]);
 	const [date, setDate] = useState("");
 
 	const addDeadline = () => {
@@ -24,21 +29,21 @@ export const Deadlines = () => {
 			alert('Date field empty, please fill it in!');
 		}
 		else{
-			const deadlinesBox = [...deadlines];
+			const deadlinesBox = [...props.deadlines];
 			deadlinesBox.push({
 				id: uuidv4(),
 				label: value,
 				date: date
 			});
-			setDeadlines(deadlinesBox);
+			props.setDeadlines(deadlinesBox);
 			setValue('');
 			setDate('');
 		}
 	};
 
-	const checkDeadlines = (id:deadlineCard['id']) => {
-		const newDeadlines = deadlines.filter(deadline => deadline.id !== id);
-		setDeadlines(newDeadlines);
+	const checkDeadlines = (id:DeadlineCard['id']) => {
+		const newDeadlines = props.deadlines.filter(deadline => deadline.id !== id);
+		props.setDeadlines(newDeadlines);
 	};
 
 	const togglePopup = () => setDisplay(!display);
@@ -149,7 +154,7 @@ export const Deadlines = () => {
 				</BasePopUp>
 			}
 			<div style={deadlineBoxStyle}>
-				{deadlines.map((deadline)=>{
+				{props.deadlines.map((deadline)=>{
 					return (
 						<div style={individualDeadlineStyle}>
 							<div style={textContainerStyle}>

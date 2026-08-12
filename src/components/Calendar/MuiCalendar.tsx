@@ -6,20 +6,20 @@ import Badge from '@mui/material/Badge';
 import { PickerDay } from '@mui/x-date-pickers';
 import type { PickerDayProps} from '@mui/x-date-pickers';
 
-interface CalendarProps {
+export interface CalendarProps {
     bgColor?:string,
     fontColor?:string,
+	highlightedDays:string[],
 }
 
 export const BasicDateCalendar = (props:CalendarProps) => {
-	const highlightedDays = ['2026-08-17', '2026-07-27'];
 
-	const ServerDay = (props: PickerDayProps) => {
-		const curServerDay = dayjs(props.day).format('YYYY-MM-DD');
-		const isSelected = highlightedDays.includes(curServerDay) ? true : false;
+	const ServerDay = (serverDayProps: PickerDayProps) => {
+		const curServerDay = dayjs(serverDayProps.day).format('YYYY-MM-DD');
+		const isSelected = props.highlightedDays.includes(curServerDay) ? true : false;
 		return(
-			<Badge badgeContent={isSelected && !props.outsideCurrentMonth ? '💗' : undefined}>
-				<PickerDay {...props} />
+			<Badge badgeContent={isSelected && !serverDayProps.outsideCurrentMonth ? '💗' : undefined}>
+				<PickerDay {...serverDayProps} />
 			</Badge>
 		);
 	};
