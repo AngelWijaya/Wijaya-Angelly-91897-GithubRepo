@@ -1,11 +1,15 @@
 import { BasicDateCalendar } from "./MuiCalendar";
+import type { DeadlineCard } from "../Deadlines/Deadlines";
 
-export const Calendar = () => {
-	// const [highlightedDays, setHighlightedDays] = React.useState([1, 2, 15]);
+interface CalendarDeadlineProps {
+	deadlines:DeadlineCard[],
+}
+
+export const Calendar = (props:CalendarDeadlineProps) => {
 	return(
 		<div>
 			<BasicDateCalendar
-				highlightedDays={["2026-08-17"]}
+				highlightedDays={props.deadlines.map((deadline) => deadline.date)}
 			/>
 		</div>
 	);
