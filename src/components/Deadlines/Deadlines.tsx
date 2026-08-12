@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseCard } from "../BaseCard";
 import { v4 as uuidv4 } from 'uuid';
-import { BasePopUp } from "./BasePopUp";
+import { BasePopUp } from "../BasePopUp";
 import { useState } from "react";
 
 

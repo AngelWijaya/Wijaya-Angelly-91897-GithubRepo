@@ -1,39 +1,40 @@
 
 import './App.css';
-import { Deadlines } from './components/Deadlines/Deadlines';
-import { Notes } from './components/Notes/Notes';
-import { Timer } from './components/Timer/Timer';
-import { TodoList } from './components/TodoList/Todo';
-import { Calendar } from '../src/components/Calendar/Calendar';
-import {MainContent} from './components/MainContent/MainContent';
-import type React from 'react';
-import { TopNav } from './components/TopNav/TopNav';
+// import { Deadlines } from './components/Deadlines/Deadlines';
+// import { Notes } from './components/Notes/Notes';
+// import { Timer } from './components/Timer/Timer';
+// import { TodoList } from './components/TodoList/Todo';
+// import { Calendar } from '../src/components/Calendar/Calendar';
+// import {MainContent} from './components/MainContent/MainContent';
+// import type React from 'react';
+// import { TopNav } from './components/TopNav/TopNav';
+import LandingPage from './components/LandingPage/LandingPage';
 
 function App() {
-	const CardOne: React.CSSProperties={
-		gridArea:'box-1',
-		padding:'20px 0 0 0',
-	};
-	const CardTwo: React.CSSProperties={
-		gridArea:'box-2',
-		padding:'20px 0 0 0',
-	};
-	const CardThree: React.CSSProperties={
-		gridArea:'box-3',
-		padding:'20px 0 0 0',
-	};
-	const CardFour: React.CSSProperties={
-		gridArea:'box-4',
-		padding:'20px 0 0 0',
-	};
-	const CardFive: React.CSSProperties={
-		gridArea:'box-5',
-		padding:'20px 0 0 0',
-	};
+	// const CardOne: React.CSSProperties={
+	// 	gridArea:'box-1',
+	// 	padding:'20px 0 0 0',
+	// };
+	// const CardTwo: React.CSSProperties={
+	// 	gridArea:'box-2',
+	// 	padding:'20px 0 0 0',
+	// };
+	// const CardThree: React.CSSProperties={
+	// 	gridArea:'box-3',
+	// 	padding:'20px 0 0 0',
+	// };
+	// const CardFour: React.CSSProperties={
+	// 	gridArea:'box-4',
+	// 	padding:'20px 0 0 0',
+	// };
+	// const CardFive: React.CSSProperties={
+	// 	gridArea:'box-5',
+	// 	padding:'20px 0 0 0',
+	// };
 
 	return (
 		<>
-			<TopNav
+			{/* <TopNav
 				logoImgUrl='logos/logo-short.png'
 				userIconUrl='icons/user-icon-50px.png'
 				altLabelLogo='logo'
@@ -51,7 +52,8 @@ function App() {
 				<div className='Column-3'>
 					<div style={CardThree}><Notes/></div>
 				</div>
-			</MainContent>
+			</MainContent> */}
+			<LandingPage/>
 		</>
 	);
 }

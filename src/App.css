@@ -3,6 +3,7 @@ html{
 }
 *{
      font-family: "Hepta Slab", serif;
+     margin: 0;
 }
 
 ::-webkit-scrollbar{

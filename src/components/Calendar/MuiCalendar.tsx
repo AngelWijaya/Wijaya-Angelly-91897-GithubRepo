@@ -2,6 +2,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import React from 'react';
+import Badge from '@mui/material/Badge';
 
 interface calendarProps {
     bgColor?:string,
@@ -9,6 +10,7 @@ interface calendarProps {
 }
 
 export const BasicDateCalendar = (props:calendarProps) => {
+
 	return (
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
 			<DateCalendar sx={{
@@ -43,11 +45,23 @@ export const BasicDateCalendar = (props:calendarProps) => {
 					textDecoration:'underline'
 				},
 				'& .Mui-selected': {
-					backgroundColor:'rgba(132, 150, 175, 0.32)'
+					backgroundColor:'rgba(79, 91, 108, 0.47)'
 				},
 				'& .MuiSvgIcon-root':{
 					color:props.fontColor??'#68778d',
+				},
+				"& .MuiPickerDay-root:focus":{
+					backgroundColor:'rgba(88, 131, 192, 0.6)',
+					color:'white'
+				},
+				"& .MuiYearCalendar-button":{
+					fontFamily:'"Hepta Slab", serif',
+				},
+				"& .MuiYearCalendar-button:focus":{
+					backgroundColor:'rgba(88, 131, 192, 0.6)',
+					color:'white'
 				}
+
 
 			}} />
 		</LocalizationProvider>

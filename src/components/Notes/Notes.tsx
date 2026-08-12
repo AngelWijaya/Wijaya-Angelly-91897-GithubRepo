@@ -2,7 +2,7 @@ import React from "react";
 import { BaseCard } from "../BaseCard";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import { BasePopUp } from "../Deadlines/BasePopUp";
+import { BasePopUp } from "../BasePopUp";
 
 interface notesCard {
 	noteLabel:string,
