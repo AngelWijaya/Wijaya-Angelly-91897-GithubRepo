@@ -1,15 +1,14 @@
 import { BasicDateCalendar } from "./MuiCalendar";
-import type { DeadlineCard } from "../Deadlines/Deadlines";
 
-interface CalendarDeadlineProps {
-	deadlines:DeadlineCard[],
+interface CalendarProps {
+	highlightedDays: string[],
 }
 
-export const Calendar = (props:CalendarDeadlineProps) => {
+export const Calendar = (props: CalendarProps) => {
 	return(
 		<div>
 			<BasicDateCalendar
-				highlightedDays={props.deadlines.map((deadline) => deadline.date)}
+				highlightedDays={props.highlightedDays}
 			/>
 		</div>
 	);
