@@ -4,29 +4,38 @@ import {TimerCard} from '../TimerCard/TimerCard';
 
 export const Timer = () => {
 	const [timerType, setTimerType] = useState('work');
+	console.log('timer type', timerType);
 
 	if (timerType === 'work') {
 		return(
 			<TimerCard
+				id='work-timer'
 				bgColor='#68778d'
 				iconUrl ='icons/edit-icon.png'
 				iconLabel='edit icon'
 				gridArea="box-1"
-				TimerCountValue={25}
+				timerValue={0.25}
+				onComplete={() => {
+					console.log('work timer done');
+					setTimerType('break');
+				}}
 			>
 			</TimerCard>
 		);
 	}
-	else{
-		return(
-			<TimerCard
-				bgColor='#68778d'
-				iconUrl ='icons/edit-icon.png'
-				iconLabel='edit icon'
-				TimerCountValue={25}
-				gridArea="box-1"
-			>
-			</TimerCard>
-		);
-	}
+	return(
+		<TimerCard
+			id='break-timer'
+			bgColor='#f00'
+			iconUrl ='icons/edit-icon.png'
+			iconLabel='edit icon'
+			timerValue={1}
+			onComplete={() => {
+				console.log('break timer done');
+				setTimerType('work');
+			}}
+			gridArea="box-1"
+		>
+		</TimerCard>
+	);
 };

@@ -3,21 +3,21 @@ import Countdown, { type CountdownRendererFn} from "react-countdown";
 import { BasePopUp } from "../BasePopUp";
 
 export interface TimerCardProps {
+	id: string;
     bgColor: string,
     iconUrl:string,
     iconLabel:string,
 	gridArea:string,
-	TimerCountValue:number,
-	BreakCountValue?:number,
+	timerValue:number,
 	onComplete: () => void;
 }
 
 export const TimerCard = (props:TimerCardProps) => {
+	console.log('TimeCardProps', props);
 	const [display,setDisplay] = useState(false);
-	const [timer, setTimer]= useState( Date.now() + props.TimerCountValue*60000);
+	const [timer, setTimer]= useState(Date.now() + props.timerValue * 60000);
 	const [isTimerPaused, setIsTimerPaused]=useState(false);
-	const [timerValue,setTimerValue]=useState(props.TimerCountValue);
-	const [breakValue,setBreakValue]=useState(props.BreakCountValue);
+	const [timerValue,setTimerValue]=useState(props.timerValue);
 
 	const customiseTimer = () => {
 		setTimer(Date.now() + timerValue*60000 );
@@ -27,38 +27,29 @@ export const TimerCard = (props:TimerCardProps) => {
 
 	const renderer: CountdownRendererFn = ({ hours, minutes, seconds, completed, api }) => {
 		const togglePauseBtn = () => {
-			if (isTimerPaused){
-				api.start();
-			}
-			else{
-				api.pause();
-			}
+			if (isTimerPaused){ api.start(); }
+			else{ api.pause(); }
 			setIsTimerPaused(!isTimerPaused);
 		};
 
-		if (completed) {
-			setTimer(Date.now() + breakValue*60000);
-		} 
-		else {
-			return (
-				<>
-					<div style={timerColumnStyle}>
-						<span>{hours}:{minutes}:{seconds}</span>
-					</div>
-					<div style={buttonTimerStyle}>
-						<button style={breakBtnStyle} onClick={togglePopup}>
-                    Edit
-						</button>
-						<button style={pausePlayStyle} onClick={togglePauseBtn}>
-							<img src="./icons/play-icon.png" alt="play-icon"/>
-						</button>
-						<button style={breakBtnStyle} onClick={api.stop}>
+		return (
+			<>
+				<div style={timerColumnStyle}>
+					<span>{hours}:{minutes}:{seconds}</span>
+				</div>
+				<div style={buttonTimerStyle}>
+					<button style={breakBtnStyle} onClick={togglePopup}>
+                    		Edit
+					</button>
+					<button style={pausePlayStyle} onClick={togglePauseBtn}>
+						<img src="./icons/play-icon.png" alt="play-icon"/>
+					</button>
+					<button style={breakBtnStyle} onClick={api.stop}>
                     Reset
-						</button>
-					</div>
-				</>
-				 );
-		}
+					</button>
+				</div>
+			</>
+		);
 	};
 	const timerColumnStyle:React.CSSProperties ={
 		display:'flex',
@@ -107,14 +98,16 @@ export const TimerCard = (props:TimerCardProps) => {
 		padding: '3px 0 0 0',
 	};
 
-
 	return (
 		<div style={timerStyle}>
 			<div style={timerCountStyle}>
 				<Countdown 
+					key={props.id}
 					date={timer}
 					autoStart={false}
 					renderer={renderer}
+					onMount={() => console.log('mounted', props)}
+					onComplete={() => props.onComplete()}
 				/>
 			</div>
 			{display &&
@@ -125,7 +118,7 @@ export const TimerCard = (props:TimerCardProps) => {
 					onAdd={customiseTimer}
 				>
 					<input type="number" value={timerValue} onChange={(e) =>setTimerValue(e.target.valueAsNumber)}/>
-					<input type="number" value={breakValue} onChange={(e) =>setBreakValue(e.target.valueAsNumber)}/>
+					{/* <input type="number" value={breakValue} onChange={(e) =>setBreakValue(e.target.valueAsNumber)}/> */}
 				</BasePopUp>
 			}
 		</div>
