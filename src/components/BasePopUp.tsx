@@ -4,7 +4,7 @@ interface BasePopUpProps {
     popUpTitle:string,
 	onClose: () => void;
     children: React.ReactNode,
-	onAdd:()=> void,
+	onAdd?:()=> void,
 	buttonLabel:string,
 
 }

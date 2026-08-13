@@ -33,8 +33,11 @@ export const TopNav = (props:topNavProps) => {
 		background: 'none',
 		border: 'none',
 	};
+	const navBarStyle:React.CSSProperties ={
+		paddingTop:'10px'
+	};
 	return (
-		<div>
+		<div style={navBarStyle}>
 			<div style={logoStyle}>
 				<img src={props.logoImgUrl} alt={props.altLabelLogo} style={imgLogoStyle}/>
 			</div>
