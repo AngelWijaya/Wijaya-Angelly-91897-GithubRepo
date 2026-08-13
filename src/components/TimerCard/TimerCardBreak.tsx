@@ -9,20 +9,20 @@ export interface TimerCardProps {
     iconLabel:string,
 	gridArea:string,
 	timerValue:number,
-	onComplete: () => void,
-	onEdit:() => void,
-	children:React.ReactNode,
+	onComplete: () => void;
 }
 
 export const TimerCard = (props:TimerCardProps) => {
+	const [timer, setTimer]= useState(Date.now() + props.timerValue * 60000);
 	console.log('TimeCardProps', props);
-	const [display,setDisplay] = useState(false);
+	const togglePopup = () => setDisplay(!display);
+
 	const [timer, setTimer]= useState(Date.now() + props.timerValue * 60000);
 	const [isTimerPaused, setIsTimerPaused]=useState(false);
-	const [timerValue,setTimerValue]=useState(props.timerValue);
+	const [breakValue,setBreakValue]=useState(props.timerValue);
 
-	const customiseTimer = () => {
-		setTimer(Date.now() + timerValue*60000 );
+	const customiseTimerBreak = () => {
+		setTimer(Date.now() + breakValue*60000 );
 	};
 
 	const togglePopup = () => setDisplay(!display);
@@ -40,7 +40,7 @@ export const TimerCard = (props:TimerCardProps) => {
 					<span>{hours}:{minutes}:{seconds}</span>
 				</div>
 				<div style={buttonTimerStyle}>
-					<button style={breakBtnStyle} onClick={props.onEdit}>
+					<button style={breakBtnStyle} onClick={togglePopup}>
                     		Edit
 					</button>
 					<button style={pausePlayStyle} onClick={togglePauseBtn}>
@@ -112,6 +112,17 @@ export const TimerCard = (props:TimerCardProps) => {
 					onComplete={() => props.onComplete()}
 				/>
 			</div>
+			{display &&
+				<BasePopUp 
+					popUpTitle="Change Pomodoro Timer"
+					buttonLabel="Apply Changes"
+					onClose={togglePopup}
+					onAdd={customiseTimer}
+				>
+					<input type="number" value={timerValue} onChange={(e) =>setTimerValue(e.target.valueAsNumber)}/>
+					{/* <input type="number" value={breakValue} onChange={(e) =>setBreakValue(e.target.valueAsNumber)}/> */}
+				</BasePopUp>
+			}
 		</div>
 		
 	);
