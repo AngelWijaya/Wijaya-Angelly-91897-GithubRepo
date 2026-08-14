@@ -1,61 +1,52 @@
-import React, { useState } from "react";
 import {TimerCard} from '../TimerCard/TimerCard';
-import { BasePopUp } from "../BasePopUp";
-import Countdown, { type CountdownRendererFn} from "react-countdown";
+// import Countdown from "react-countdown";
+import { useState } from 'react';
 
 export const Timer = () => {
-	const [timer, setTimer]= useState(Date.now() + props.timerValue * 60000);
-	const togglePopup = () => setDisplay(!display);
-	const [display,setDisplay] = useState(false);
 	const [timerType, setTimerType] = useState('work');
-
-	const customiseTimer = () => {
-		setTimer(Date.now() + timerValue*60000 );
+	const handleTimerWorkComplete = () => {
+		setTimerType('break');
 	};
-	
+	const handleTimerBreakComplete = () =>{
+		setTimerType('work');
+	};
 	if (timerType === 'work') {
 		return(
 			<TimerCard
+				id='work-timer'
 				bgColor='#68778d'
 				iconUrl ='icons/edit-icon.png'
 				iconLabel='edit icon'
 				gridArea="box-1"
-<<<<<<< HEAD
 				timerValue={0.25}
+				onStart={()=>{console.log('helo');}}
 				onComplete={() => {
+					handleTimerWorkComplete();
 					console.log('work timer done');
-					setTimerType('break');
 				}}
-				onEdit={togglePopup}
-=======
-				TimerCountValue={25}
+			>
+			</TimerCard>
+		);
+	}
+	if(timerType === 'break'){
+		return(
+			<TimerCard
+				id='break-timer'
+				bgColor='#f00'
+				iconUrl ='icons/edit-icon.png'
+				iconLabel='edit icon'
+				timerValue={0.5}
+				onStart={()=>{console.log('hi');}}
+				onComplete={() => {
+					console.log('break timer done');
+					handleTimerBreakComplete();
+				}}
+				gridArea="box-1"
 			>
 			</TimerCard>
 		);
 	}
 	else{
-		return(
-			<TimerCard
-				bgColor='#68778d'
-				iconUrl ='icons/edit-icon.png'
-				iconLabel='edit icon'
-				TimerCountValue={25}
-				gridArea="box-1"
->>>>>>> parent of 96924a4 (attempt at conditional rendering)
-			>
-				{display &&
-					<BasePopUp 
-						popUpTitle="Change Pomodoro Timer"
-						buttonLabel="Apply Changes"
-						onClose={togglePopup}
-						onAdd={customiseTimer}
-					>
-						<input type="number" value={timerValue} onChange={(e) =>setTimerValue(e.target.valueAsNumber)}/>
-						{/* <input type="number" value={breakValue} onChange={(e) =>setBreakValue(e.target.valueAsNumber)}/> */}
-					</BasePopUp>
-				}
-			</TimerCard>
-			
-		);
+		console.log('timer not working', timerType);
 	}
 };
