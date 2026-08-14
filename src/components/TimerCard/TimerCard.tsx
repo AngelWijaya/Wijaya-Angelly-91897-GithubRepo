@@ -3,13 +3,16 @@ import Countdown, { type CountdownRendererFn} from "react-countdown";
 import { BasePopUp } from "../BasePopUp";
 import { DateTime } from 'luxon';
 
+type Mode = 'work' | 'break';
+
 export interface TimerCardProps {
 	id: string;
     bgColor: string,
     iconUrl:string,
     iconLabel:string,
 	gridArea:string,
-	timerValue:number,
+	workTimeInSec:number,
+	breakTimeInSec: number;
 }
 
 export const TimerCard = (props:TimerCardProps) => {
@@ -61,10 +64,10 @@ export const TimerCard = (props:TimerCardProps) => {
 	};
 
 	const [display, setDisplay] = useState(false);
+	const [mode, setMode] = useState<Mode>('work');
 	const [targetDateInMs, setTargetDateInMs] = useState(DateTime.now().toMillis());
 	const [isPaused, setIsPaused] = useState(false);
 	const [isAutoStart, setIsAutoStart] = useState(false);
-	const [timerValue, setTimerValue] = useState(props.timerValue);
 
 	const togglePopup = () => setDisplay(!display);
 
@@ -106,10 +109,17 @@ export const TimerCard = (props:TimerCardProps) => {
 
 	React.useEffect(() => { 
 		const main = () => {
-			updateTargetDateTime(15); 
+			updateTargetDateTime(mode === 'work' ? props.workTimeInSec : props.breakTimeInSec); 
 		};
 		main();
-	}, []);  
+	}, []); // eslint-disable-line
+
+	React.useEffect(() => {
+		const main = () => {
+			updateTargetDateTime(mode === 'work' ? props.workTimeInSec : props.breakTimeInSec); 
+		};
+		main();
+	}, [mode]); // eslint-disable-line
 
 	return (
 		<div style={timerStyle}>
@@ -120,7 +130,8 @@ export const TimerCard = (props:TimerCardProps) => {
 					autoStart={isAutoStart}
 					renderer={renderer}
 					onComplete={() => {
-						updateTargetDateTime(10);
+						setMode(mode === 'work' ? 'break' : 'work');
+						// updateTargetDateTime(10);
 					}}
 				/>
 			</div>
@@ -131,7 +142,8 @@ export const TimerCard = (props:TimerCardProps) => {
 					// onAdd={(customiseTimer)}
 					buttonLabel="Add Deadlines"
 				>
-					<input type="number" maxLength={50} value={timerValue} onChange={(e) =>setTimerValue(e.target.valueAsNumber)}/>
+					test
+					{/* <input type="number" maxLength={50} value={timerValue} onChange={(e) =>setTimerValue(e.target.valueAsNumber)}/> */}
 					{/* <input type="number" value={} onChange={(e)=> setDate(e.target.valueAsNumber)}/> */}
 				</BasePopUp>
 			}

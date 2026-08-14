@@ -10,7 +10,8 @@ export const Timer = () => {
 			iconUrl ='icons/edit-icon.png'
 			iconLabel='edit icon'
 			gridArea="box-1"
-			timerValue={0.25}
+			workTimeInSec={10}
+			breakTimeInSec={5}
 			// onStart={()=>{console.log('helo');}}
 		/>
 	);
