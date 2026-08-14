@@ -60,20 +60,23 @@ export const TimerCard = (props:TimerCardProps) => {
 		padding: '3px 0 0 0',
 	};
 
-	console.log('TimeCardProps', props);
-
-	const [display,setDisplay] = useState(false);
-	const [targetDate, setTargetDate]= useState(DateTime.now().toMillis());
-	const [isTimerPaused, setIsTimerPaused]=useState(false);
-	const [timerValue, setTimerValue]=useState(props.timerValue);
+	const [display, setDisplay] = useState(false);
+	const [targetDateInMs, setTargetDateInMs] = useState(DateTime.now().toMillis());
+	const [isPaused, setIsPaused] = useState(false);
+	const [isAutoStart, setIsAutoStart] = useState(false);
+	const [timerValue, setTimerValue] = useState(props.timerValue);
 
 	const togglePopup = () => setDisplay(!display);
 
 	const renderer: CountdownRendererFn = ({ hours, minutes, seconds, api }) => {
 		const togglePauseBtn = () => {
-			if (isTimerPaused) { api.start(); }
-			else { api.pause(); }
-			setIsTimerPaused(!isTimerPaused);
+			if (isPaused) { 
+				api.start(); 
+				setIsAutoStart(true);
+			} else { 
+				api.pause(); 
+			}
+			setIsPaused(!isPaused);
 		};
 
 		return (
@@ -98,7 +101,7 @@ export const TimerCard = (props:TimerCardProps) => {
 
 	const updateTargetDateTime = (seconds: number) => {
 		const newTargetDateTime = DateTime.now().toMillis() + seconds * 1000;
-		setTargetDate(newTargetDateTime);
+		setTargetDateInMs(newTargetDateTime);
 	};
 
 	React.useEffect(() => { 
@@ -112,12 +115,11 @@ export const TimerCard = (props:TimerCardProps) => {
 		<div style={timerStyle}>
 			<div style={timerCountStyle}>
 				<Countdown 
-					key={targetDate}
-					date={targetDate}
-					autoStart={true}
+					key={targetDateInMs}
+					date={targetDateInMs}
+					autoStart={isAutoStart}
 					renderer={renderer}
 					onComplete={() => {
-						setIsTimerPaused(true);
 						updateTargetDateTime(10);
 					}}
 				/>
