@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseCard } from "../BaseCard";
 import { useState } from "react";
-import { stringify, v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { BasePopUp } from "../BasePopUp";
 
 interface notesCard {

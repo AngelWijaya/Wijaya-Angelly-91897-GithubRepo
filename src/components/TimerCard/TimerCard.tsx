@@ -21,6 +21,7 @@ export const TimerCard = (props:TimerCardProps) => {
 		display:'flex',
 		justifyContent:'center',
 		alignItems:'center',
+		cursor:'pointer'
 	};
 
 	const pausePlayStyle: React.CSSProperties ={
@@ -30,6 +31,7 @@ export const TimerCard = (props:TimerCardProps) => {
 		border: '2px solid white',
 		backgroundColor: '#68778d',
 		margin:'0 10px 0 10px',
+		cursor:'pointer'
 	};
 
 	const breakBtnStyle: React.CSSProperties ={
@@ -40,6 +42,7 @@ export const TimerCard = (props:TimerCardProps) => {
 		backgroundColor: '#68778d',
 		color: 'white',
 		margin: '10px 0 0 0',
+		cursor:'pointer'
 	};
 
 	const timerStyle: React.CSSProperties = {
@@ -63,6 +66,8 @@ export const TimerCard = (props:TimerCardProps) => {
 		justifyContent: 'center',
 		padding: '3px 0 0 0',
 	};
+
+
 	const [mode, setMode] = useState<Mode>('work');
 	const [targetDateInMs, setTargetDateInMs] = useState(DateTime.now().toMillis());
 	const [isPaused, setIsPaused] = useState(false);
@@ -84,14 +89,14 @@ export const TimerCard = (props:TimerCardProps) => {
 		return (
 			<>
 				<div style={timerColumnStyle}>
-					<span>{hours}:{minutes}:{seconds}</span>
+					<span>{String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}</span>
 				</div>
 				<div style={buttonTimerStyle}>
 					<button style={breakBtnStyle} onClick={props.popUpToggle}>
 						Edit
 					</button>
 					<button style={pausePlayStyle} onClick={togglePauseBtn}>
-						<img src="./icons/play-icon.png" alt="play-icon"/>
+						<img src={isPaused? 'icons/play-icon.png':'icons/pause-icon.png'}/>
 					</button>
 					<button style={breakBtnStyle} onClick={api.stop}>
                     	Reset
@@ -113,7 +118,7 @@ export const TimerCard = (props:TimerCardProps) => {
 		};
 		main();
 	}, [mode, props.workTimeInSec, props.breakTimeInSec]); 
-
+	
 
 	return (
 		<div style={timerStyle}>

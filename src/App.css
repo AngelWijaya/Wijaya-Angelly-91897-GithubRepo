@@ -26,12 +26,21 @@ input:not([type="image" i], [type="range" i], [type="checkbox" i], [type="radio"
     overflow-clip-margin: 0px !important;
     overflow: clip !important;
 }
-input[type="text" i] {
+input[type="text" i]{
     padding-block: 1px;
     padding-inline: 2px;
     margin: 0 0 0 20px;
     color: #77879E;
     width: 290px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1.5px solid #77879E;
+}
+
+input[type="number"]{
+    margin: 0 0 0 10px;
+    color: #77879E;
+    width: 170px;
     height: 30px;
     border-radius: 10px;
     border: 1.5px solid #77879E;
