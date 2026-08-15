@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Countdown, { type CountdownRendererFn} from "react-countdown";
-import { BasePopUp } from "../BasePopUp";
 import { DateTime } from 'luxon';
 
 type Mode = 'work' | 'break';
@@ -12,7 +11,9 @@ export interface TimerCardProps {
     iconLabel:string,
 	gridArea:string,
 	workTimeInSec:number,
-	breakTimeInSec: number;
+	breakTimeInSec: number,
+	popUpToggle:() => void,
+	children: React.ReactNode,
 }
 
 export const TimerCard = (props:TimerCardProps) => {
@@ -62,14 +63,12 @@ export const TimerCard = (props:TimerCardProps) => {
 		justifyContent: 'center',
 		padding: '3px 0 0 0',
 	};
-
-	const [display, setDisplay] = useState(false);
 	const [mode, setMode] = useState<Mode>('work');
 	const [targetDateInMs, setTargetDateInMs] = useState(DateTime.now().toMillis());
 	const [isPaused, setIsPaused] = useState(false);
 	const [isAutoStart, setIsAutoStart] = useState(false);
 
-	const togglePopup = () => setDisplay(!display);
+	console.log('props', props);
 
 	const renderer: CountdownRendererFn = ({ hours, minutes, seconds, api }) => {
 		const togglePauseBtn = () => {
@@ -88,7 +87,7 @@ export const TimerCard = (props:TimerCardProps) => {
 					<span>{hours}:{minutes}:{seconds}</span>
 				</div>
 				<div style={buttonTimerStyle}>
-					<button style={breakBtnStyle} onClick={togglePopup}>
+					<button style={breakBtnStyle} onClick={props.popUpToggle}>
 						Edit
 					</button>
 					<button style={pausePlayStyle} onClick={togglePauseBtn}>
@@ -103,23 +102,18 @@ export const TimerCard = (props:TimerCardProps) => {
 	};
 
 	const updateTargetDateTime = (seconds: number) => {
+		console.log('updateTargetDateTime', seconds);
 		const newTargetDateTime = DateTime.now().toMillis() + seconds * 1000;
 		setTargetDateInMs(newTargetDateTime);
 	};
 
-	React.useEffect(() => { 
-		const main = () => {
-			updateTargetDateTime(mode === 'work' ? props.workTimeInSec : props.breakTimeInSec); 
-		};
-		main();
-	}, []); // eslint-disable-line
-
 	React.useEffect(() => {
 		const main = () => {
-			updateTargetDateTime(mode === 'work' ? props.workTimeInSec : props.breakTimeInSec); 
+			updateTargetDateTime(mode === 'work' ? props.workTimeInSec : props.breakTimeInSec);
 		};
 		main();
-	}, [mode]); // eslint-disable-line
+	}, [mode, props.workTimeInSec, props.breakTimeInSec]); 
+
 
 	return (
 		<div style={timerStyle}>
@@ -131,23 +125,10 @@ export const TimerCard = (props:TimerCardProps) => {
 					renderer={renderer}
 					onComplete={() => {
 						setMode(mode === 'work' ? 'break' : 'work');
-						// updateTargetDateTime(10);
 					}}
 				/>
 			</div>
-			{display &&
-				<BasePopUp 
-					popUpTitle="Set a deadline"
-					onClose={togglePopup}
-					// onAdd={(customiseTimer)}
-					buttonLabel="Add Deadlines"
-				>
-					test
-					{/* <input type="number" maxLength={50} value={timerValue} onChange={(e) =>setTimerValue(e.target.valueAsNumber)}/> */}
-					{/* <input type="number" value={} onChange={(e)=> setDate(e.target.valueAsNumber)}/> */}
-				</BasePopUp>
-			}
+			{props.children}
 		</div>
-		
 	);
 };

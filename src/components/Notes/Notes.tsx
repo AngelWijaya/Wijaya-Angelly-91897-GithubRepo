@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseCard } from "../BaseCard";
 import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { stringify, v4 as uuidv4 } from 'uuid';
 import { BasePopUp } from "../BasePopUp";
 
 interface notesCard {
@@ -37,8 +37,12 @@ export const Notes = () => {
 			setNotes(notesBox);
 			setValue('');
 			setUrl('');
+			const storageNotes = JSON.stringify(notesBox);
+			localStorage.setItem('notes',storageNotes);
+			console.log(localStorage);
 		}
 	};
+
 
 	const checkNotes = (id: notesCard['id']) =>{
 		const newNotes = notes.filter(note => note.id !== id);

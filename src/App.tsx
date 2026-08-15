@@ -45,7 +45,9 @@ function App() {
 			/>
 			<MainContent>
 				<div className='Column-1'>
-					<div style={CardOne}><Timer/></div>
+					<div style={CardOne}><Timer
+						workTimeInSec={10}
+						breakTimeInSec={5}/></div>
 					<div style={CardFour}><Calendar highlightedDays={deadlines.map((deadline) => deadline.date)}/></div>
 				</div>
 				<div className='Column-2'> 
