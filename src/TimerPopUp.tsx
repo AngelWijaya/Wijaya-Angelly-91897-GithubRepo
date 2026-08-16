@@ -2,9 +2,10 @@ import React from 'react';
 
 interface TimerPopUpProps {
     popUpTitle:string,
-    onToggle: () => void;
+    onClick: () => void;
     children: React.ReactNode,
     buttonLabel:string,
+	onToggle: () =>void;
 
 }
 const popUpContainerStyle:React.CSSProperties = {
@@ -62,18 +63,26 @@ const popUpBackground :React.CSSProperties = {
 	right: '0',
 	bottom: '0',
 };
+const closeIconStyle:React.CSSProperties ={
+	cursor:'pointer',
+	paddingLeft:'190px',
+	width:'23px',
+	height:'23px',
+	position:'absolute',
+};
 export const TimerPopUp = (props:TimerPopUpProps) => {
 	return (
 		<div style={popUpBackground}>
 			<div style={popUpContainerStyle}>
 				<div style={popUpTitlesStyle}>
 					<span style={textstyle}>{props.popUpTitle}</span>
+					<img src="icons/close-icon.png" alt="close icon" style={closeIconStyle} onClick={props.onToggle}/>
 				</div>
 				<div style={popUpDetailStyle}>
 					{props.children}
 				</div>
 				<div style={popUpDivStyle}>
-					<button style={popUpBtnStyle} onClick={props.onToggle}>{props.buttonLabel}</button>
+					<button style={popUpBtnStyle} onClick={props.onClick}>{props.buttonLabel}</button>
 				</div>
 			</div>
 		</div>

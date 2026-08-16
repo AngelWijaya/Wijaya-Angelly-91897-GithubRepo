@@ -1,5 +1,4 @@
 import {TimerCard} from '../TimerCard/TimerCard';
-import { BasePopUp } from "../BasePopUp";
 import { useState } from 'react';
 import { TimerPopUp } from '../../TimerPopUp';
 
@@ -7,16 +6,22 @@ interface TimerCardProps {
 	workTimeInSec:number,
 	breakTimeInSec: number,
 }
+
 export const Timer = (props:TimerCardProps) => {
 
 	const [display, setDisplay] = useState(false);
-	const [workValue, setWorkValue] = useState(0);
-	const [breakValue,setBreakValue] = useState(0);
+	const [workValueInSec, setWorkValueInSec] = useState(0);
+	const [breakValueInSec,setBreakValueInSec] = useState(0);
+	const [workValueInMin, setWorkValueInMin]=useState(0);
+	const [breakValueInMin, setBreakValueInMin]=useState(0);
 	const togglePopup = () => setDisplay(!display);
 
+	const updateTimeValue = () => {
+		setWorkValueInSec(workValueInMin * 60);
+		setBreakValueInSec(breakValueInMin *60);
+	};
 	const inputStyle:React.CSSProperties ={
 		width:'180px',
-		// padding:'0 21px 0 21px'
 	};
 
 	const inputTitle:React.CSSProperties={
@@ -31,23 +36,24 @@ export const Timer = (props:TimerCardProps) => {
 			iconUrl ='icons/edit-icon.png'
 			iconLabel='edit icon'
 			gridArea="box-1"
-			workTimeInSec={workValue}
-			breakTimeInSec={breakValue}
+			workTimeInSec={workValueInSec}
+			breakTimeInSec={breakValueInSec}
 			popUpToggle={togglePopup}
 		>
 			{display && 
 				<TimerPopUp 
 					popUpTitle="Update Timer"
-					onToggle={togglePopup}
-					buttonLabel="Close"
+					onClick={updateTimeValue}
+					buttonLabel="Update"
+					onToggle={() => {setDisplay(false);}}
 				>	
 					<div style={inputStyle}>
-						<span style={inputTitle}>Work Time</span>
-						<input type="number" value={workValue} onChange={(e) =>setWorkValue(e.target.valueAsNumber)}/>
+						<span style={inputTitle}>Work Time (min)</span>
+						<input type="number" value={workValueInMin} onChange={(e) =>setWorkValueInMin(e.target.valueAsNumber)}/>
 					</div>
 					<div style={inputStyle}>
-						<span style={inputTitle}>Break Time</span>
-						<input type="number" value={breakValue} onChange={(e)=> setBreakValue(e.target.valueAsNumber)}/>
+						<span style={inputTitle}>Break Time (min)</span>
+						<input type="number" value={breakValueInMin} onChange={(e)=> setBreakValueInMin(e.target.valueAsNumber)}/>
 					</div>
 				</TimerPopUp>}
 		</TimerCard>

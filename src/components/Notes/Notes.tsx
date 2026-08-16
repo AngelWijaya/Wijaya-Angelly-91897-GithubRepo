@@ -1,10 +1,11 @@
-import React from "react";
 import { BaseCard } from "../BaseCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { BasePopUp } from "../BasePopUp";
+import { useLocalStorage} from '../useLocalStorage';
 
-interface notesCard {
+
+interface NotesCard {
 	noteLabel:string,
 	noteLink:string,
 	id:string,
@@ -12,14 +13,15 @@ interface notesCard {
 
 export const Notes = () => {
 	const [display, setDisplay] =useState(false);
-	const [notes,setNotes] =useState<notesCard[]>([]);
+	const [notes,setNotes] =useState<NotesCard[]>([]);
 	const [value,setValue] = useState("");
 	const [url,setUrl]=useState("");
-
+	const { saveToLocalStorage, loadFromLocalStorage } = useLocalStorage('notes');
 	const toggleNotesPopUp = () => {
 		setDisplay(!display);
 	};
 	
+
 	const uploadNotes = () =>{
 		if(value == "" ){
 			alert("Title field empty, please fill it in!");
@@ -37,17 +39,21 @@ export const Notes = () => {
 			setNotes(notesBox);
 			setValue('');
 			setUrl('');
-			const storageNotes = JSON.stringify(notesBox);
-			localStorage.setItem('notes',storageNotes);
-			console.log(localStorage);
+			saveToLocalStorage(notesBox);
+
 		}
 	};
 
 
-	const checkNotes = (id: notesCard['id']) =>{
+	const checkNotes = (id: NotesCard['id']) =>{
 		const newNotes = notes.filter(note => note.id !== id);
 		setNotes(newNotes);
 	};
+
+	useEffect(()=>{
+		const loadedData = loadFromLocalStorage<NotesCard>();
+		setNotes(loadedData);
+	}, []); // eslint-disable-line
 
 	const notesBtnStyle : React.CSSProperties ={
 		cursor:'pointer',
