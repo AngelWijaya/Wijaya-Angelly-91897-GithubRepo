@@ -18,12 +18,14 @@ export const BasicDateCalendar = (props:CalendarProps) => {
 		const curServerDay = dayjs(serverDayProps.day).format('YYYY-MM-DD');
 		const isSelected = props.highlightedDays.includes(curServerDay) ? true : false;
 		return(
-			<Badge badgeContent={isSelected && !serverDayProps.outsideCurrentMonth ? '' : undefined} color='secondary' 
+			<Badge badgeContent={isSelected && !serverDayProps.outsideCurrentMonth ? '' : undefined} color='secondary'
 				sx={{'& .MuiBadge-badge':{
-					backgroundColor:'rgb(150, 175, 209)',
-					height:'12px',
-					width:'9px',
-				}}}>
+					backgroundColor:'rgb(210, 116, 116)',
+					fontSize:7,
+					height: 12, 
+					minWidth: 12
+				}
+				}}>
 				<PickerDay {...serverDayProps} />
 			</Badge>
 		);
@@ -42,7 +44,7 @@ export const BasicDateCalendar = (props:CalendarProps) => {
 					width:'390px',
 					minHeight:'400px',
 					'& .MuiPickerDay-root':{
-						fontSize:'15px',
+						fontSize:'20px',
 						fontFamily:'"Hepta Slab", serif',
 						color:props.fontColor??'#68778d',
 					},

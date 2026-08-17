@@ -6,10 +6,12 @@ import { useState } from "react";
 interface Todo {
 	id: string,
 	label:string,
+	isDone:boolean,
 }
 export const TodoList = () =>{
 	const [todos, setTodos] = useState<Todo[]>([]);
 	const [value, setValue] = useState("");
+	// const [isChecked, setIsChecked] =useState(false);
 
 	const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement> ) => {
 		if (event.key == 'Enter'){
@@ -25,23 +27,38 @@ export const TodoList = () =>{
 			const tmpTodos = [...todos];
 			tmpTodos.push({
 				id: uuidv4(),
-				label: value
+				label: value,
+				isDone: false,
 			});
 			setTodos(tmpTodos);
 			setValue("");
 		}
 	};
-	const checkTodos = (id: Todo['id']) => {
+	const deleteTodo = (id: Todo['id']) => {
 		const newTodos = todos.filter(todo => todo.id !== id);
 		setTodos(newTodos);
 		
+	};
+	const markTodoAsDone = (id: Todo['id'], isDone: Todo['isDone']) => {
+		const unDone = todos.filter(todo => todo.id !== id);
+		const unCheckedTodos = [...todos];
+		unCheckedTodos.map( (checkedTodos) => {
+			if(unCheckedTodos !== unDone && checkedTodos.id == id){
+				checkedTodos.isDone = true;
+			}
+			else{
+				console.log('not working');
+			}
+		});
+		setTodos(unCheckedTodos);
+		console.log(unCheckedTodos);
 	};
 	const inputStyle: React.CSSProperties ={
 		paddingBlock: '1px',
 		paddingInline: '2px',
 		margin: '0 0 0 0px',
 		color: '#77879E',
-		width: '290px',
+		width: '250px',
 		height: '30px',
 		borderRadius: '10px',
 		border: '1.5px solid #77879E',
@@ -52,10 +69,21 @@ export const TodoList = () =>{
 		width: '60px',
 		height: '34px',
 		borderRadius: '10px',
-		border: '1.5px solid #68778d',
+		border: '2px solid #68778d',
 		backgroundColor:'#68778d' ,
 		color: 'white',
 		margin:'0 0 0 5px',
+	};
+	const buttonStyle2:React.CSSProperties={
+		cursor:'pointer',
+		width: '34px',
+		height: '34px',
+		borderRadius: '100%',
+		border: '1.5px solid #68778d',
+		background:'transparent',
+		color: 'white',
+		margin:'0 0 0 5px',
+		padding: '4px 5px 4px 4px',
 	};
 
 	const todoContentStyle: React.CSSProperties ={
@@ -77,6 +105,7 @@ export const TodoList = () =>{
 		borderRadius: '10px',
 	};
 	const textTodoStyle:React.CSSProperties ={
+		// textDecoration: ? 'line-through': 'none',
 		maxWidth: '340px',
 		width: 'fit-content',
 		padding: '0 0 0 10px',
@@ -91,11 +120,16 @@ export const TodoList = () =>{
 		overflowY: 'scroll',
 	};
 	const iconBlockStyle :React.CSSProperties ={
-		cursor:'pointer',
 		background:'none',
 		marginLeft:'auto',
 		position:'sticky',
 		border:'none',
+	};
+
+	const individualIconsStyle:React.CSSProperties={
+		background:'none',
+		border:'none',
+		cursor:'pointer',
 	};
 	return (
 		<BaseCard
@@ -109,6 +143,9 @@ export const TodoList = () =>{
 			<div>
 				<div style={todoContentStyle}>
 					<input placeholder="type here.." style={inputStyle} value={value} onChange={(e) => setValue(e.target.value)} maxLength={50} onKeyDown={handleEnterKey}></input>
+					<button style={buttonStyle2} onClick={() => {setValue("");}}>
+						<img src="icons/close-icon.png"	alt="clear icon"/>
+					</button>
 					<button style={buttonStyle} onClick={addTodo}>Add</button>
 				</div>
 				<div style={todosContainerStyle}>
@@ -116,12 +153,17 @@ export const TodoList = () =>{
 						return (
 							<div style={individualTodoStyle}>
 								<p style={textTodoStyle}>{todo.label}</p>
-								<button onClick={() => checkTodos(todo.id)} style={iconBlockStyle}>
-									<img src="icons/check-icon.png" alt="check"/>
-								</button>
+								<div style={iconBlockStyle}>
+									<button onClick={() => deleteTodo(todo.id)} style={individualIconsStyle}>
+										<img src="icons/trash-icon.png" alt="check"/>
+									</button>
+									<button onClick={() => {markTodoAsDone(todo.id);}} style={individualIconsStyle}>
+										<img src="icons/check-icon.png" alt="check"/>
+									</button>
+								</div>
 							</div>
-						);
-					})}
+						);})
+					}
 				</div>
 			</div>
 		</BaseCard>    

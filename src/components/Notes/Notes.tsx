@@ -20,7 +20,6 @@ export const Notes = () => {
 	const toggleNotesPopUp = () => {
 		setDisplay(!display);
 	};
-	
 
 	const uploadNotes = () =>{
 		if(value == "" ){
@@ -40,19 +39,21 @@ export const Notes = () => {
 			setValue('');
 			setUrl('');
 			saveToLocalStorage(notesBox);
-
 		}
 	};
-
 
 	const checkNotes = (id: NotesCard['id']) =>{
 		const newNotes = notes.filter(note => note.id !== id);
 		setNotes(newNotes);
+		saveToLocalStorage(newNotes);
 	};
 
 	useEffect(()=>{
-		const loadedData = loadFromLocalStorage<NotesCard>();
-		setNotes(loadedData);
+		const main = () => {
+			const loadedData = loadFromLocalStorage<NotesCard>();
+			setNotes(loadedData);
+		};
+		main();
 	}, []); // eslint-disable-line
 
 	const notesBtnStyle : React.CSSProperties ={

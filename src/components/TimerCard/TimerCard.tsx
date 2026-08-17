@@ -77,6 +77,12 @@ export const TimerCard = (props:TimerCardProps) => {
 
 	const renderer: CountdownRendererFn = ({ hours, minutes, seconds, api }) => {
 		const togglePauseBtn = () => {
+			if(props.workTimeInSec == 0){
+				alert(`You haven't set a work time yet, please set it on "Edit"`);
+			}
+			if(props.breakTimeInSec == 0){
+				alert(`You haven't set a break time yet, please set it on "Edit"`);
+			}
 			if (isPaused) { 
 				api.start(); 
 				setIsAutoStart(true);
