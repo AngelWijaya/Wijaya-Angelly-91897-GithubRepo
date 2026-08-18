@@ -2,7 +2,8 @@ import React from "react";
 import { BaseCard } from "../BaseCard";
 import { v4 as uuidv4 } from 'uuid';
 import { BasePopUp } from "../BasePopUp";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocalStorage} from '../useLocalStorage';
 
 
 export interface DeadlineCard {
@@ -17,6 +18,7 @@ interface DeadlineProps {
 };
 
 export const Deadlines = (props: DeadlineProps) => {
+	const { saveToLocalStorage, loadFromLocalStorage } = useLocalStorage('deadlines');
 	const [display,setDisplay] = useState(false);
 	const [value, setValue] = useState("");
 	const [date, setDate] = useState("");
@@ -38,6 +40,7 @@ export const Deadlines = (props: DeadlineProps) => {
 			props.setDeadlines(deadlinesBox);
 			setValue('');
 			setDate('');
+			saveToLocalStorage(deadlinesBox);
 		}
 	};
 
@@ -47,6 +50,15 @@ export const Deadlines = (props: DeadlineProps) => {
 	};
 
 	const togglePopup = () => setDisplay(!display);
+
+	
+	useEffect(()=>{
+		const main = () => {
+			const loadedData = loadFromLocalStorage<DeadlineCard>();
+			props.setDeadlines(loadedData);
+		};
+		main();
+			}, []); // eslint-disable-line
 
 	const deadlinesBtnStyle : React.CSSProperties ={
 		fontSize: '15px',

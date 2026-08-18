@@ -138,7 +138,7 @@ export const Notes = () => {
 			label="My Notes"
 			iconLabel="Notes icon"
 			iconUrl="icons/book-icon.png"
-			height='617px'
+			height='626px'
 			width='400px'
 			gridArea="box-4"
 		>

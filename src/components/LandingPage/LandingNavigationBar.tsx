@@ -1,4 +1,3 @@
-import React, { type ReactNode } from 'react';
 
 interface navBarProps {
     logoURL:string,
@@ -13,6 +12,7 @@ export const LandingNavigationBar = (props: navBarProps) => {
 		padding: '10px 10px 0 20px'
 	};
 	const navigationBarStyle:React.CSSProperties={
+		position:'fixed',
 		display:'inline-flex',
 		width:'100%',
 		height:'70px',

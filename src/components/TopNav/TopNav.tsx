@@ -24,11 +24,17 @@ export const TopNav = (props:topNavProps) => {
 		padding:'10px 0 10px 0',
 		minHeight:'30px',
 	};
+	const returnStyle:React.CSSProperties={
+		marginLeft:'auto',
+		position:'sticky',
+
+	};
 	return (
 		<div style={navBarStyle}>
 			<div style={logoStyle}>
 				<img src={props.logoImgUrl} alt={props.altLabelLogo} style={imgLogoStyle}/>
 			</div>
+			<button style={returnStyle}>Return to Landing Page</button>
 		</div>
 	);
 };

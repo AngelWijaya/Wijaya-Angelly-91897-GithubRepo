@@ -1,7 +1,8 @@
 import React from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { BaseCard } from "../BaseCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocalStorage} from '../useLocalStorage';
 
 interface Todo {
 	id: string,
@@ -9,9 +10,9 @@ interface Todo {
 	isDone:boolean,
 }
 export const TodoList = () =>{
+	const { saveToLocalStorage, loadFromLocalStorage } = useLocalStorage('todos');
 	const [todos, setTodos] = useState<Todo[]>([]);
 	const [value, setValue] = useState("");
-	// const [isChecked, setIsChecked] =useState(false);
 
 	const handleEnterKey = (event: React.KeyboardEvent<HTMLInputElement> ) => {
 		if (event.key == 'Enter'){
@@ -32,6 +33,7 @@ export const TodoList = () =>{
 			});
 			setTodos(tmpTodos);
 			setValue("");
+			saveToLocalStorage(tmpTodos);
 		}
 	};
 	const deleteTodo = (id: Todo['id']) => {
@@ -42,7 +44,7 @@ export const TodoList = () =>{
 	const markTodoAsDone = (id: Todo['id'], isDone: Todo['isDone']) => {
 		const unDone = todos.filter(todo => todo.id !== id);
 		const unCheckedTodos = [...todos];
-		unCheckedTodos.map( (checkedTodos) => {
+		unCheckedTodos.map((checkedTodos) => {
 			if(unCheckedTodos !== unDone && checkedTodos.id == id){
 				checkedTodos.isDone = true;
 			}
@@ -53,6 +55,14 @@ export const TodoList = () =>{
 		setTodos(unCheckedTodos);
 		console.log(unCheckedTodos);
 	};
+
+	useEffect(()=>{
+		const main = () => {
+			const loadedData = loadFromLocalStorage<Todo>();
+			setTodos(loadedData);
+		};
+		main();
+		}, []); // eslint-disable-line
 	const inputStyle: React.CSSProperties ={
 		paddingBlock: '1px',
 		paddingInline: '2px',
@@ -105,7 +115,16 @@ export const TodoList = () =>{
 		borderRadius: '10px',
 	};
 	const textTodoStyle:React.CSSProperties ={
-		// textDecoration: ? 'line-through': 'none',
+		textDecoration: 'none',
+		maxWidth: '340px',
+		width: 'fit-content',
+		padding: '0 0 0 10px',
+		color: '#68778d',
+		fontWeight: 'bolder',
+	};
+	
+	const textTodoModifiedStyle:React.CSSProperties={
+		textDecoration:'line-through',
 		maxWidth: '340px',
 		width: 'fit-content',
 		padding: '0 0 0 10px',
@@ -152,12 +171,12 @@ export const TodoList = () =>{
 					{todos.map((todo) => {
 						return (
 							<div style={individualTodoStyle}>
-								<p style={textTodoStyle}>{todo.label}</p>
+								<p style={todo.isDone? textTodoModifiedStyle:textTodoStyle}>{todo.label}</p>
 								<div style={iconBlockStyle}>
 									<button onClick={() => deleteTodo(todo.id)} style={individualIconsStyle}>
 										<img src="icons/trash-icon.png" alt="check"/>
 									</button>
-									<button onClick={() => {markTodoAsDone(todo.id);}} style={individualIconsStyle}>
+									<button onClick={() => {markTodoAsDone(todo.id, todo.isDone);}} style={individualIconsStyle}>
 										<img src="icons/check-icon.png" alt="check"/>
 									</button>
 								</div>
