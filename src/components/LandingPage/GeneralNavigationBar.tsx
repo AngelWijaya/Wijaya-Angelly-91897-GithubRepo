@@ -5,7 +5,7 @@ interface navBarProps {
     children: React.ReactNode,
 }
 
-export const LandingNavigationBar = (props: navBarProps) => {
+export const GeneralNavigationBar = (props: navBarProps) => {
 	const logoStyle:React.CSSProperties ={
 		width:'100px',
 		height:'50px',

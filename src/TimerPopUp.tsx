@@ -50,6 +50,8 @@ const popUpBtnStyle:React.CSSProperties ={
 };
 
 const popUpBackground :React.CSSProperties = { 
+	overflow:'hidden',
+	zIndex:'999',
 	width: '100%',
 	height: '100%',
 	borderRadius: '0',

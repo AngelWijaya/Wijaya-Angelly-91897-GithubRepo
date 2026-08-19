@@ -9,7 +9,10 @@ import { TopNav } from './components/TopNav/TopNav';
 import { useState } from 'react';
 import type { DeadlineCard } from './components/Deadlines/Deadlines';
 
-export const MainWeb = () => {
+interface mainWebProps {
+	onClick: () => void
+}
+export const MainWeb = (props:mainWebProps) => {
 	const [deadlines, setDeadlines] = useState<DeadlineCard[]>([]);
 	const CardOne: React.CSSProperties={
 		gridArea:'box-1',
@@ -38,6 +41,7 @@ export const MainWeb = () => {
 				userIconUrl='icons/user-icon-50px.png'
 				altLabelLogo='logo'
 				altLabelUser='user icon'
+				onClick={props.onClick}
 			/> 
 			<MainContent>
 				<div className='Column-1'>

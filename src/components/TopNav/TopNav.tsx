@@ -5,6 +5,7 @@ export interface topNavProps {
     userIconUrl:string,
     altLabelLogo:string,
     altLabelUser:string,
+	onClick:() => void
 }
 
 export const TopNav = (props:topNavProps) => {
@@ -25,16 +26,33 @@ export const TopNav = (props:topNavProps) => {
 		minHeight:'30px',
 	};
 	const returnStyle:React.CSSProperties={
-		marginLeft:'auto',
-		position:'sticky',
+		background:'none',
+		border:'2px solid #68778d',
+		color:'#68778d',
+		fontWeight:'bold',
+		borderRadius:'10px',
+		margin:'5px 0 0 0',
+		cursor:'pointer',
+		width:'230px',
+		height:'40px',
+	};
 
+	const btnContainerNavStyle:React.CSSProperties={
+		background: 'none',
+		border: 'none',
+		display:'flex',
+		justifyContent:'right',
+		padding: '0 15px 0 0',
 	};
 	return (
 		<div style={navBarStyle}>
 			<div style={logoStyle}>
 				<img src={props.logoImgUrl} alt={props.altLabelLogo} style={imgLogoStyle}/>
 			</div>
-			<button style={returnStyle}>Return to Landing Page</button>
+			<div style={btnContainerNavStyle}>
+				<button style={returnStyle} onClick={props.onClick}>Return to Landing Page</button>
+			</div>
+			
 		</div>
 	);
 };
