@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { GeneralNavigationBar } from './GeneralNavigationBar';
 import LandingPageContent from './LandingPageContent';
 import { BasePopUp } from '../BasePopUp';
+
 export interface landingPageProps{
 	onClickApp: () => void,
+	onClickNeuroDiv:() => void,
 }
 const LandingPage = (props:landingPageProps) => {
 	const [displayPopUp, setDisplayPopUp]= useState(false);
 
+
 	const togglePopUp = () => {
 		setDisplayPopUp(!displayPopUp);
-
 	};
 	const navbarContentStyle:React.CSSProperties={
 		display:'inline-flex',
@@ -93,6 +95,7 @@ const LandingPage = (props:landingPageProps) => {
 				centralIllustration='logos/logo-fullV3.png'
 				onClick={props.onClickApp}
 				onToggle={togglePopUp}
+				onClickNeuro={props.onClickNeuroDiv}
 			>
 				<footer style={textStyle}>
 					<div style={divSpacingStyle}>

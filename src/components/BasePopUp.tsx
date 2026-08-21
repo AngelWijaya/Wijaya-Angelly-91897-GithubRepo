@@ -11,6 +11,11 @@ interface BasePopUpProps {
 	paddingClose?:string,
 	fontColor?:string,
 	fontWeight?:string,
+	display?:string,
+	maxWidth?:string,
+	generalPadding?:string,
+	buttonWidth?:string,
+	btnColor?:string,
 }
 export const BasePopUp = (props:BasePopUpProps) => {
 	const popUpContainerStyle:React.CSSProperties = {
@@ -31,11 +36,11 @@ export const BasePopUp = (props:BasePopUpProps) => {
 		fontWeight:props.fontWeight ?? 'normal'
 	};
 	const popUpDetailStyle :React.CSSProperties ={
-		display:'flex',
+		display: props.display ?? 'flex',
 		justifyContent:'center',
 		alignItems:'center',
-		padding:'0px 20px 0px 0',
-		maxWidth:'400px',
+		padding: props.generalPadding ?? '0px 20px 0px 0',
+		maxWidth: props.maxWidth ?? '400px',
 	};
 
 	const popUpDivStyle: React.CSSProperties ={
@@ -47,9 +52,9 @@ export const BasePopUp = (props:BasePopUpProps) => {
 
 	const popUpBtnStyle:React.CSSProperties ={
 		cursor:'pointer',
-		width:'360px',
+		width: props.buttonWidth ??'360px',
 		height:'40px',
-		backgroundColor:'#6d7b8e',
+		backgroundColor:props.btnColor ?? '#6d7b8e',
 		border: 'none',
 		borderRadius:'10px',
 		color:'white',
