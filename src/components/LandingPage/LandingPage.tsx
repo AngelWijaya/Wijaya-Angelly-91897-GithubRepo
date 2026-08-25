@@ -59,7 +59,7 @@ const LandingPage = (props:landingPageProps) => {
 		padding:'10px 0 0 0',
 		textAlign:'left',
 		width:'100%',
-		height:'80px',
+		height:'100px',
 		backgroundColor:'#465060',
 		fontSize:'13px',
 	};
@@ -105,6 +105,7 @@ const LandingPage = (props:landingPageProps) => {
 
 						<li>General calendar logic and UI from MUI:'https://mui.com/x/react-date-pickers/date-calendar/'</li>
 						<li>General Timer Logic from npm react-countdown:'https://www.npmjs.com/package/react-countdown'</li>
+						<li>Icons from Google Icons: https://fonts.google.com/icons</li>
 					</div>
 				</footer>
 			</LandingPageContent>

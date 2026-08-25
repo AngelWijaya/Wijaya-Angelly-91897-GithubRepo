@@ -16,7 +16,7 @@ export const Notes = () => {
 	const [notes,setNotes] =useState<NotesCard[]>([]);
 	const [value,setValue] = useState("");
 	const [url,setUrl]=useState("");
-	const { saveToLocalStorage, loadFromLocalStorage, deleteFromLocalStorage } = useLocalStorage('notes');
+	const { saveToLocalStorage, loadFromLocalStorage} = useLocalStorage('notes');
 	const toggleNotesPopUp = () => {
 		setDisplay(!display);
 	};
@@ -43,10 +43,14 @@ export const Notes = () => {
 		}
 	};
 
+
 	const checkNotes = (id: NotesCard['id']) =>{
-		const newNotes = notes.filter(note => note.id !== id);
-		setNotes(newNotes);
-		saveToLocalStorage(newNotes);
+		if (confirm('Are you sure you want to delete this? ( press OK if yes )')){
+			const newNotes = notes.filter(note => note.id !== id);
+			setNotes(newNotes);
+			saveToLocalStorage(newNotes);
+		}
+	
 	};
 
 	useEffect(()=>{
