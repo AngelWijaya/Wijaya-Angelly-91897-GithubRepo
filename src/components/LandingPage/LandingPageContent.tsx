@@ -152,6 +152,7 @@ const LandingPageContent = (props:landingContentProps) => {
 	
 	const toggleNeuroDivPopUp = () => {
 		setDisplayNeuroDivPopUp(!displayNeuroDivPopUp);
+
 	};
 
 	return (
@@ -203,7 +204,7 @@ const LandingPageContent = (props:landingContentProps) => {
 								</div>
 							</div>
 							<div style={NeuroDiversityMode}>
-								<h2 style={modeTitleStyle}>Neuro Diversity mode</h2>
+								<h2 style={modeTitleStyle}>Neurodiversity mode</h2>
 								<span>This is the neurodiversity-friendly mode, if you choose this, the calendar and timer feature will be hidden. But you can choose to show/hide them anytime.</span>
 								<div style={containerModeBtnDivStyleNeuro}>
 									<button style={modeBtnStyle} onClick={props.onClickNeuro}>Choose neurodiversity mode</button>

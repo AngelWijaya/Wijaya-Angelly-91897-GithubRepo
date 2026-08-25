@@ -7,10 +7,11 @@ export const useLocalStorage = (storageKey: string) => {
 	const loadFromLocalStorage = <T>(): T[] => {
 		const wantedData = localStorage.getItem(storageKey);
 		return typeof wantedData === 'string' ? JSON.parse(wantedData):[];
-
 	};
+	
 	return {
 		saveToLocalStorage,
-		loadFromLocalStorage
+		loadFromLocalStorage,
+		
 	};
 };

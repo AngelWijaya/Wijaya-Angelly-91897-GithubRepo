@@ -16,7 +16,7 @@ export const Notes = () => {
 	const [notes,setNotes] =useState<NotesCard[]>([]);
 	const [value,setValue] = useState("");
 	const [url,setUrl]=useState("");
-	const { saveToLocalStorage, loadFromLocalStorage } = useLocalStorage('notes');
+	const { saveToLocalStorage, loadFromLocalStorage, deleteFromLocalStorage } = useLocalStorage('notes');
 	const toggleNotesPopUp = () => {
 		setDisplay(!display);
 	};
@@ -39,6 +39,7 @@ export const Notes = () => {
 			setValue('');
 			setUrl('');
 			saveToLocalStorage(notesBox);
+			toggleNotesPopUp();
 		}
 	};
 

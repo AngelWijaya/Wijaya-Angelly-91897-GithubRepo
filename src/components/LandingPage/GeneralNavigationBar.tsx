@@ -12,6 +12,7 @@ export const GeneralNavigationBar = (props: navBarProps) => {
 		padding: '10px 10px 0 20px'
 	};
 	const navigationBarStyle:React.CSSProperties={
+		zIndex:'9999',
 		position:'fixed',
 		display:'inline-flex',
 		width:'100%',

@@ -39,6 +39,7 @@ export const TodoList = () =>{
 	const deleteTodo = (id: Todo['id']) => {
 		const newTodos = todos.filter(todo => todo.id !== id);
 		setTodos(newTodos);
+		saveToLocalStorage(newTodos);
 		
 	};
 	const markTodoAsDone = (id: Todo['id'], isDone: Todo['isDone']) => {
@@ -63,6 +64,7 @@ export const TodoList = () =>{
 		};
 		main();
 		}, []); // eslint-disable-line
+
 	const inputStyle: React.CSSProperties ={
 		paddingBlock: '1px',
 		paddingInline: '2px',
@@ -84,6 +86,7 @@ export const TodoList = () =>{
 		color: 'white',
 		margin:'0 0 0 5px',
 	};
+	
 	const buttonStyle2:React.CSSProperties={
 		cursor:'pointer',
 		width: '34px',

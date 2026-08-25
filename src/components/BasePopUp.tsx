@@ -69,7 +69,7 @@ export const BasePopUp = (props:BasePopUpProps) => {
 	};
 
 	const popUpBackground :React.CSSProperties = { 
-		zIndex:'999',
+		zIndex:'99999',
 		width: '100%',
 		height: '100%',
 		borderRadius: '0',

@@ -20,6 +20,7 @@ export const TimerNeuro = (props:TimerCardProps) => {
 	const updateTimeValue = () => {
 		setWorkValueInSec(workValueInMin * 60);
 		setBreakValueInSec(breakValueInMin *60);
+		togglePopup();
 	};
 	const inputStyle:React.CSSProperties ={
 		width:'180px',

@@ -41,12 +41,14 @@ export const Deadlines = (props: DeadlineProps) => {
 			setValue('');
 			setDate('');
 			saveToLocalStorage(deadlinesBox);
+			togglePopup();
 		}
 	};
 
 	const checkDeadlines = (id:DeadlineCard['id']) => {
 		const newDeadlines = props.deadlines.filter(deadline => deadline.id !== id);
 		props.setDeadlines(newDeadlines);
+		saveToLocalStorage(newDeadlines);
 	};
 
 	const togglePopup = () => setDisplay(!display);
