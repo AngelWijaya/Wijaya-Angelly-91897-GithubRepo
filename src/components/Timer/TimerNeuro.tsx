@@ -5,7 +5,7 @@ import { TimerPopUp } from '../../TimerPopUp';
 interface TimerCardProps {
 	workTimeInSec:number,
 	breakTimeInSec: number,
-	toggleTimerinApp?:() => void,
+	toggleTimerinApp:() => void,
 }
 
 export const TimerNeuro = (props:TimerCardProps) => {

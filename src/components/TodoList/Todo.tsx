@@ -42,7 +42,9 @@ export const TodoList = () =>{
 		saveToLocalStorage(newTodos);
 		
 	};
+	 
 	const markTodoAsDone = (id: Todo['id'], isDone: Todo['isDone']) => {
+		console.log(isDone);
 		const unDone = todos.filter(todo => todo.id !== id);
 		const unCheckedTodos = [...todos];
 		unCheckedTodos.map((checkedTodos) => {

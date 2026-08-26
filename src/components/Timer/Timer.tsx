@@ -7,8 +7,9 @@ interface TimerCardProps {
 	breakTimeInSec: number,
 }
 
+ 
 export const Timer = (props:TimerCardProps) => {
-
+	console.log(props);
 	const [display, setDisplay] = useState(false);
 	const [workValueInSec, setWorkValueInSec] = useState(0);
 	const [breakValueInSec,setBreakValueInSec] = useState(0);

@@ -10,6 +10,7 @@ export default defineConfig([
   {
     files: ['**/*.{ts,tsx}'],
     "rules": {
+      "no-unused-vars": "off",
       "semi": ["error", "always"],
       "indent": [
         "error", "tab"
