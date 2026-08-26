@@ -37,7 +37,7 @@ export const MainWeb = (props:mainWebProps) => {
 	return (
 		<>
     		<TopNav
-				logoImgUrl='logos/logo-short.png'
+				logoImgUrl='logo-short.png'
 				userIconUrl='icons/user-icon-50px.png'
 				altLabelLogo='logo'
 				altLabelUser='user icon'
