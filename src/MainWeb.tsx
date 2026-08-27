@@ -34,6 +34,13 @@ export const MainWeb = (props:mainWebProps) => {
 		gridArea:'box-5',
 		padding:'20px 0 0 0',
 	};
+	const stylingDiv:React.CSSProperties={
+		display:'flex',
+		justifyContent:'center',
+		textAlign:'center',
+		alignItems:'center',
+
+	};
 	return (
 		<>
     		<TopNav
@@ -43,21 +50,24 @@ export const MainWeb = (props:mainWebProps) => {
 				altLabelUser='user icon'
 				onClick={props.onClick}
 			/> 
-			<MainContent>
-				<div className='Column-1'>
-					<div style={CardOne}><Timer
-						workTimeInSec={10}
-						breakTimeInSec={5}/></div>
-					<div style={CardFour}><Calendar highlightedDays={deadlines.map((deadline) => deadline.date)}/></div>
-				</div>
-				<div className='Column-2'> 
-					<div style={CardTwo}><TodoList/></div>
-					<div style={CardFive}><Deadlines deadlines={deadlines} setDeadlines={setDeadlines}/></div>
-				</div>
-				<div className='Column-3'>
-					<div style={CardThree}><Notes/></div>
-				</div>
-			</MainContent> 
+			<div style={stylingDiv}>
+				<MainContent>
+					<div className='Column-1'>
+						<div style={CardOne}><Timer
+							workTimeInSec={10}
+							breakTimeInSec={5}/></div>
+						<div style={CardFour}><Calendar highlightedDays={deadlines.map((deadline) => deadline.date)}/></div>
+					</div>
+					<div className='Column-2'> 
+						<div style={CardTwo}><TodoList/></div>
+						<div style={CardFive}><Deadlines deadlines={deadlines} setDeadlines={setDeadlines}/></div>
+					</div>
+					<div className='Column-3'>
+						<div style={CardThree}><Notes/></div>
+					</div>
+				</MainContent> 
+			</div>
+			
 		</>
 	);
 };
