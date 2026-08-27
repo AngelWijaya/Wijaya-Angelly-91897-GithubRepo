@@ -1,0 +1,4 @@
+//Instructions for viewing/running outcome
+
+- Download Node.js
+- Go to terminal and type "npm run dev"
