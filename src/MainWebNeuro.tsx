@@ -103,7 +103,13 @@ export const MainWebNeuro = (props:mainWebProps) => {
 		display:'inline-flex',
 		justifyContent:'right',
 	};
+	const stylingDiv:React.CSSProperties={
+		display:'flex',
+		justifyContent:'center',
+		textAlign:'center',
+		alignItems:'center',
 
+	};
 	return (
 		<>
 			<TopNav
@@ -113,23 +119,24 @@ export const MainWebNeuro = (props:mainWebProps) => {
 				altLabelUser='user icon'
 				onClick={props.onClick}
 			/> 
-			<MainContent>
-				<div className='Column-1'>
-					<div style={CardOne}>
-						{ displayTimer &&
+			<div style={stylingDiv}>
+				<MainContent>
+					<div className='Column-1'>
+						<div style={CardOne}>
+							{ displayTimer &&
                             <TimerNeuro
                         	workTimeInSec={10}
                         	breakTimeInSec={5}
                             	toggleTimerinApp={toggleTimer}/>
-						}
-						{displayTimerDummy && 
+							}
+							{displayTimerDummy && 
                             <div style={timerDummyContainerStyle}>
                             	<button style={timerBtnstyle} onClick={toggleTimer}>Show Timer</button>
                             </div>
-						}
-					</div>
-					<div style={CardFour}>
-						{ displayCalendar && 
+							}
+						</div>
+						<div style={CardFour}>
+							{ displayCalendar && 
                             <>
                             	<div style={calendarHideBtnContainerStyle}> 
                             		<button style={calendarHideBtnStyle} onClick={toggleCalendar}>
@@ -138,23 +145,24 @@ export const MainWebNeuro = (props:mainWebProps) => {
                             	</div>
                             	<Calendar highlightedDays={deadlines.map((deadline) => deadline.date)}/>
                             </> 
-						}
-						{displayCalendarDummy &&
+							}
+							{displayCalendarDummy &&
                             <div style={calendarDummyContainerStyle}>
                             	<button style={timerBtnstyle} onClick={toggleCalendar}>Show Calendar</button>
                             </div>
-						}
+							}
 
+						</div>
 					</div>
-				</div>
-				<div className='Column-2'> 
-					<div style={CardTwo}><TodoList/></div>
-					<div style={CardFive}><Deadlines deadlines={deadlines} setDeadlines={setDeadlines}/></div>
-				</div>
-				<div className='Column-3'>
-					<div style={CardThree}><Notes/></div>
-				</div>
-			</MainContent> 
+					<div className='Column-2'> 
+						<div style={CardTwo}><TodoList/></div>
+						<div style={CardFive}><Deadlines deadlines={deadlines} setDeadlines={setDeadlines}/></div>
+					</div>
+					<div className='Column-3'>
+						<div style={CardThree}><Notes/></div>
+					</div>
+				</MainContent> 
+			</div>
 		</>
 	);
 };
