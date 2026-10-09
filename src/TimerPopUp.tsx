@@ -67,7 +67,7 @@ const popUpBackground :React.CSSProperties = {
 };
 const closeIconStyle:React.CSSProperties ={
 	cursor:'pointer',
-	paddingLeft:'190px',
+	paddingLeft:'90px',
 	width:'23px',
 	height:'23px',
 	position:'absolute',

@@ -173,6 +173,7 @@ export const Notes = () => {
 					onClose={toggleNotesPopUp}
 					onAdd={uploadNotes}
 					buttonLabel="Upload"
+					paddingClose="90px"
 				>
 					<input type="text" placeholder="Title of your notes.." value={value} onChange={(e) => setValue(e.target.value)}/>
 					<input type="url" placeholder="URL.." value={url} onChange={(e) => setUrl(e.target.value)} style={urlStyle}/>

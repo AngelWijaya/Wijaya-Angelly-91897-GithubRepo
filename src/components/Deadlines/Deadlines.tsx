@@ -162,6 +162,7 @@ export const Deadlines = (props: DeadlineProps) => {
 					onClose={togglePopup}
 					onAdd={addDeadline}
 					buttonLabel="Add Deadlines"
+					paddingClose="90px"
 				>
 					<input type="text" style={inputTextStyle} maxLength={50} value={value} onChange={(e) =>setValue(e.target.value)}/>
 					<input type="date" style={datePopUpStyle} value={date} onChange={(e)=> setDate(e.target.value)}/>
