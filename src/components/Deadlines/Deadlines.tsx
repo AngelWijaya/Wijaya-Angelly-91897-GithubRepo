@@ -106,6 +106,7 @@ export const Deadlines = (props: DeadlineProps) => {
 	};
 
 	const deadlineTextStyle: React.CSSProperties ={
+		textAlign:'left',
 		overflow:'hidden',
 		textOverflow:'ellipsis',
 		whiteSpace:'nowrap',
