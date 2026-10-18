@@ -143,7 +143,8 @@ export const Deadlines = (props: DeadlineProps) => {
 	};
 
 	const textContainerStyle :React.CSSProperties ={
-		width:'200px'
+		width:'200px',
+		textAlign:'left',
 	};
 	return(
 		<BaseCard 
