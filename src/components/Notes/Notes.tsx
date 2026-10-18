@@ -94,7 +94,7 @@ export const Notes = () => {
 	};
 
 	const notesTitleStyle:React.CSSProperties={
-		textAlign :'center',
+		textAlign :'left',
 		overflow:'hidden',
 		textOverflow:'ellipsis',
 		whiteSpace:'nowrap',
